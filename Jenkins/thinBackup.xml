@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jvnet.hudson.plugins.thinbackup.ThinBackupPluginImpl plugin="thinBackup@1.7">
+  <fullBackupSchedule></fullBackupSchedule>
+  <diffBackupSchedule></diffBackupSchedule>
+  <backupPath>/srv/jenkins/backups</backupPath>
+  <nrMaxStoredFull>-1</nrMaxStoredFull>
+  <excludedFilesRegex></excludedFilesRegex>
+  <waitForIdle>true</waitForIdle>
+  <forceQuietModeTimeout>120</forceQuietModeTimeout>
+  <cleanupDiff>false</cleanupDiff>
+  <moveOldBackupsToZipFile>false</moveOldBackupsToZipFile>
+  <backupBuildResults>false</backupBuildResults>
+  <backupBuildArchive>false</backupBuildArchive>
+  <backupUserContents>false</backupUserContents>
+  <backupNextBuildNumber>false</backupNextBuildNumber>
+</org.jvnet.hudson.plugins.thinbackup.ThinBackupPluginImpl>
