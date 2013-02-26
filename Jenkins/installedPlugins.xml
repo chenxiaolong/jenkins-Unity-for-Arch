@@ -10,12 +10,12 @@
       <string>1.0</string>
     </entry>
     <entry>
-      <string>translation</string>
-      <string>1.10</string>
-    </entry>
-    <entry>
       <string>any-buildstep</string>
       <string>0.1</string>
+    </entry>
+    <entry>
+      <string>translation</string>
+      <string>1.10</string>
     </entry>
     <entry>
       <string>clone-workspace-scm</string>
@@ -32,10 +32,6 @@
     <entry>
       <string>maven-plugin</string>
       <string>1.502</string>
-    </entry>
-    <entry>
-      <string>signal-killer</string>
-      <string>1.0</string>
     </entry>
     <entry>
       <string>run-condition</string>
