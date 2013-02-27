@@ -838,23 +838,6 @@ mv new-commit old-commit</command>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
-            <command>/srv/jenkins/in-build-list.sh python-oauthlib</command>
-          </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
-            <configs>
-              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
-                <projects>UFA-2.0-Build-python-oauthlib</projects>
-                <condition>ALWAYS</condition>
-                <triggerWithNoParameters>false</triggerWithNoParameters>
-                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
-              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-            </configs>
-          </publisher>
-          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
-        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh unity-lens-applications</command>
           </condition>
           <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
@@ -940,23 +923,6 @@ mv new-commit old-commit</command>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
-            <command>/srv/jenkins/in-build-list.sh unity-scope-video-remote</command>
-          </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
-            <configs>
-              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
-                <projects>UFA-2.0-Build-unity-scope-video-remote</projects>
-                <condition>ALWAYS</condition>
-                <triggerWithNoParameters>false</triggerWithNoParameters>
-                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
-              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-            </configs>
-          </publisher>
-          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
-        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh compiz-ubuntu</command>
           </condition>
           <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
@@ -998,6 +964,74 @@ mv new-commit old-commit</command>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
                 <projects>UFA-2.0-Build-hud</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh TESTPKG-gtest-ubuntu</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <projects>UFA-2.0-Build-TESTPKG-gtest-ubuntu</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh TESTPKG-xorg-gtest</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <projects>UFA-2.0-Build-TESTPKG-xorg-gtest</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh TESTPKG-gmock-ubuntu</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <projects>UFA-2.0-Build-TESTPKG-gmock-ubuntu</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh TESTPKG-dbus-test-runner</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <projects>UFA-2.0-Build-TESTPKG-dbus-test-runner</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
                 <buildAllNodesWithLabel>false</buildAllNodesWithLabel>

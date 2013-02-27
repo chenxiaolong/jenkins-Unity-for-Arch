@@ -29,12 +29,12 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sudo /srv/jenkins/build-wrapper.sh unity-lens-photos</command>
+      <command>sudo /srv/jenkins/build-wrapper.sh TESTPKG-dbus-test-runner</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>unity-lens-photos/*.pkg.tar.xz</artifacts>
+      <artifacts>TESTPKG-dbus-test-runner/*.pkg.tar.xz</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>
