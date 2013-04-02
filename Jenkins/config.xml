@@ -42,7 +42,7 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-03-22&lt;/strong&gt;: Added unity-tweak-tool&lt;br /&gt;&lt;br /&gt;&#xd;
+  <systemMessage>&lt;strong&gt;2013-03-23&lt;/strong&gt;: Added gnome-screensaver&lt;br /&gt;&lt;br /&gt;&#xd;
 The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
 &lt;br /&gt;&lt;br /&gt;&#xd;
 &lt;strong&gt;[Unity-for-Arch]&#xd;
