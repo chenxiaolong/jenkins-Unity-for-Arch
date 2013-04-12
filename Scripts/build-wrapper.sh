@@ -35,6 +35,9 @@ if [ ! -f "${CONFIG_FILE}" ]; then
   exit 1
 fi
 
+# Clean up old packages from the pacman cache
+python3 /srv/jenkins/clean-pacman-cache.py
+
 source "${CONFIG_FILE}"
 
 ARCH_PACKAGE=$(sudo -u nobody bash -c "source ${1}/PKGBUILD && \
