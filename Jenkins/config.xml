@@ -42,7 +42,7 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-03-23&lt;/strong&gt;: Added gnome-screensaver&lt;br /&gt;&lt;br /&gt;&#xd;
+  <systemMessage>&lt;strong&gt;2013-04-12&lt;/strong&gt;: Why the heck is everything taking so long? &lt;a href=&quot;https://bbs.archlinux.org/viewtopic.php?pid=1257972#p1257972&quot;&gt;Here&apos;s why&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
 &lt;br /&gt;&lt;br /&gt;&#xd;
 &lt;strong&gt;[Unity-for-Arch]&#xd;
@@ -74,13 +74,13 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.4">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.5">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
-      <jobNames class="tree-set">
+      <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
       </jobNames>
       <jobFilters/>
@@ -118,13 +118,13 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.4">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.5">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch-Extra</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
-      <jobNames class="tree-set">
+      <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
       </jobNames>
       <jobFilters/>
