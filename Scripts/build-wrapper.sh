@@ -36,7 +36,10 @@ if [ ! -f "${CONFIG_FILE}" ]; then
 fi
 
 # Clean up old packages from the pacman cache
-python3 /srv/jenkins/clean-pacman-cache.py
+(
+  flock 321 || (echo "Failed to acquire lock on pacman cache!" && exit 1)
+  python3 /srv/jenkins/clean-pacman-cache.py
+) 321>$(dirname ${0})/cache.lock
 
 source "${CONFIG_FILE}"
 
