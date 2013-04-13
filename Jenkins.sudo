@@ -1,1 +1,1 @@
-jenkins ALL=(ALL) NOPASSWD: /srv/jenkins/build-wrapper.sh, /srv/jenkins/publish-wrapper.sh, /srv/jenkins/get-from-pkgbuild.sh, /srv/jenkins/publish-livecd.sh
+jenkins ALL=(ALL) NOPASSWD: /srv/jenkins/build-wrapper.sh, /srv/jenkins/publish-wrapper.sh, /srv/jenkins/get-from-pkgbuild.sh, /srv/jenkins/publish-livecd.sh, /srv/jenkins/build-livecd.sh
