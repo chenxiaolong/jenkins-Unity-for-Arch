@@ -33,8 +33,12 @@ mkdir -p unity/cache/
 
   # Clean up old packages from the pacman cache
   python3 /srv/jenkins/clean-pacman-cache.py
+
+  set +x
+  echo "Copying system pacman cache to local cache..."
+  cp /var/cache/pacman/pkg/*.pkg.tar.xz unity/cache/
+  set -x
 ) 321>$(dirname ${0})/cache.lock
-cp /var/cache/pacman/pkg/*.pkg.tar.xz unity/cache/
 
 # Build LiveCD
 ./create-livecd.sh
@@ -42,6 +46,7 @@ cp /var/cache/pacman/pkg/*.pkg.tar.xz unity/cache/
 # Copy LiveCD image to appropriate location
 mkdir -p /srv/livecds/
 ISOFILE=$(ls unity/out/*.iso | tail -n 1)
+ISOFILE=$(basename ${ISOFILE})
 ISOARCH=$(sed 's/^Unity-for-Arch-[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+-\(.\+\)\.iso/\1/g' <<< ${ISOFILE})
 cp unity/out/${ISOFILE} /srv/livecds/
 echo "${ISOFILE}" > /srv/livecds/latest.${ISOARCH}
@@ -50,11 +55,14 @@ echo "${ISOFILE}" > /srv/livecds/latest.${ISOARCH}
 (
   flock 321 || (echo "Failed to acquire lock on pacman cache!" && exit 1)
 
+  set +x
+  echo "Merging local pacman cache to system cache..."
   for i in unity/cache/*.pkg.tar.xz; do
     if [ ! -f /var/cache/pacman/pkg/$(basename ${i}) ]; then
       mv ${i} /var/cache/pacman/pkg/
     fi
   done
+  set -x
   
   # Clean up old packages from the pacman cache
   python3 /srv/jenkins/clean-pacman-cache.py
