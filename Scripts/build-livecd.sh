@@ -7,6 +7,24 @@ fi
 
 SHA512_CREATE_SCRIPT='5e4f6702332a4df4427c06cc4efa04261acefd48af5862a0d5a638c668aaf2930892eab325c3651ecef49d46926975c6a46ac5e47205abdd831c00c26df145c0'
 SHA512_BUILD_SCRIPT='0dab32b9825c8ebf0b63afd5d586de11bc496825bc3c2db70d6061d3db4dcf7b805ebb57e8e08a1edbd09e9752720d4f840b0e936d6c8a4c2aa6158dd8604be8'
+ARCH_SUPPORTED=('i686' 'x86_64')
+ARCH=$(uname -m)
+
+if [ ! -z "${1}" ]; then
+  ARCH=${1}
+fi
+
+SUPPORTED=false
+for i in ${ARCH_SUPPORTED[@]}; do
+  if [ "x${i}" == "x${ARCH}" ]; then
+    SUPPORTED=true
+    break
+  fi
+done
+if [ "x${SUPPORTED}" != "xtrue" ]; then
+  echo "Unsupported architecture ${ARCH}!"
+  exit 1
+fi
 
 if ! echo "${SHA512_CREATE_SCRIPT} create-livecd.sh" | sha512sum -c --status; then
   echo "create-livecd.sh sha512sum does not match!"
@@ -41,15 +59,28 @@ mkdir -p unity/cache/
 ) 321>$(dirname ${0})/cache.lock
 
 # Build LiveCD
-./create-livecd.sh
+setarch ${ARCH} ./create-livecd.sh
 
 # Copy LiveCD image to appropriate location
 mkdir -p /srv/livecds/
 ISOFILE=$(ls unity/out/*.iso | tail -n 1)
 ISOFILE=$(basename ${ISOFILE})
 ISOARCH=$(sed 's/^Unity-for-Arch-[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+-\(.\+\)\.iso/\1/g' <<< ${ISOFILE})
-cp unity/out/${ISOFILE} /srv/livecds/
-echo "${ISOFILE}" > /srv/livecds/latest.${ISOARCH}
+
+COUNTER=1
+NEWISOFILE=${ISOFILE}
+while [ -f /srv/livecds/${NEWISOFILE} ]; do
+  echo "${NEWISOFILE} already exists. Increasing release number..."
+  let COUNTER++
+  NEWISOFILE=$(sed -n -r "s/^(Unity-for-Arch-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)(-Release[[:digit:]]+)?-(.+\.iso)$/\1-Release${COUNTER}-\3/p" <<< ${NEWISOFILE})
+  if [ "${COUNTER}" -eq 10 ]; then
+    echo "\${COUNTER} is at 10. Something is clearly wrong!"
+    exit 1
+  fi
+done
+
+cp unity/out/${ISOFILE} /srv/livecds/${NEWISOFILE}
+echo "${NEWISOFILE}" > /srv/livecds/latest.${ISOARCH}
 
 # Merge local cache back to system cache
 (
