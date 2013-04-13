@@ -10,11 +10,13 @@ if [ -z "${1}" ]; then
   exit 1
 fi
 
-if [ ! -f "unity/out/${1}" ]; then
-  echo "unity/out/${1} does not exist!"
+FILE=/srv/livecds/$(cat /srv/livecds/latest.${1})
+
+if [ ! -f "${FILE}" ]; then
+  echo "${FILE} does not exist!"
   exit 1
 fi
 
-LIVECD_DATE=$(sed 's/^Unity-for-Arch-\([[:digit:]]\+\)\.\([[:digit:]]\+\)\.\([[:digit:]]\+\)-.\+\.iso/\1-\2-\3/g' <<< ${1})
+LIVECD_DATE=$(sed 's/^Unity-for-Arch-\([[:digit:]]\+\)\.\([[:digit:]]\+\)\.\([[:digit:]]\+\)-.\+\.iso/\1-\2-\3/g' <<< $(basename ${FILE}))
 
-rsync -e ssh -avP unity/out/${1} chenxiaolong@frs.sourceforge.net:/home/frs/project/unity-for-arch/${LIVECD_DATE}/
+rsync -e ssh -avP ${FILE} chenxiaolong@frs.sourceforge.net:/home/frs/project/unity-for-arch/${LIVECD_DATE}/
