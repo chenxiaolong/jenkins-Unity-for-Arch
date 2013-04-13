@@ -26,9 +26,36 @@ cleanup() {
 
 trap "cleanup" SIGINT SIGTERM SIGKILL EXIT
 
+# Copy system cache to local cache
+mkdir -p unity/cache/
+(
+  flock 321 || (echo "Failed to acquire lock on pacman cache!" && exit 1)
+
+  # Clean up old packages from the pacman cache
+  python3 /srv/jenkins/clean-pacman-cache.py
+) 321>$(dirname ${0})/cache.lock
+cp /var/cache/pacman/pkg/*.pkg.tar.xz unity/cache/
+
+# Build LiveCD
 ./create-livecd.sh
+
+# Copy LiveCD image to appropriate location
 mkdir -p /srv/livecds/
 ISOFILE=$(ls unity/out/*.iso | tail -n 1)
 ISOARCH=$(sed 's/^Unity-for-Arch-[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+-\(.\+\)\.iso/\1/g' <<< ${ISOFILE})
 cp unity/out/${ISOFILE} /srv/livecds/
 echo "${ISOFILE}" > /srv/livecds/latest.${ISOARCH}
+
+# Merge local cache back to system cache
+(
+  flock 321 || (echo "Failed to acquire lock on pacman cache!" && exit 1)
+
+  for i in unity/cache/*.pkg.tar.xz; do
+    if [ ! -f /var/cache/pacman/pkg/$(basename ${i}) ]; then
+      mv ${i} /var/cache/pacman/pkg/
+    fi
+  done
+  
+  # Clean up old packages from the pacman cache
+  python3 /srv/jenkins/clean-pacman-cache.py
+) 321>$(dirname ${0})/cache.lock
