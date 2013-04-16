@@ -42,7 +42,7 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-04-12&lt;/strong&gt;: Why the heck is everything taking so long? &lt;a href=&quot;https://bbs.archlinux.org/viewtopic.php?pid=1257972#p1257972&quot;&gt;Here&apos;s why&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
+  <systemMessage>&lt;strong&gt;2013-04-13&lt;/strong&gt;: LiveCD monthly builds are up! Images published at &lt;a href=https://sf.net/p/unity-for-arch&gt;https://sf.net/p/unity-for-arch&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
 &lt;br /&gt;&lt;br /&gt;&#xd;
 &lt;strong&gt;[Unity-for-Arch]&#xd;
@@ -158,6 +158,50 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
           <id>dashboard_portlet_720</id>
+          <name>Jenkins jobs list</name>
+        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.5">
+      <owner class="hudson" reference="../../.."/>
+      <name>Unity-for-Arch-LiveCD</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>UFALCD-.*</includeRegex>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.stats.StatJobs>
+          <id>dashboard_portlet_23602</id>
+          <name>Job statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatJobs>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_29818</id>
+          <name>Build statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+      </rightPortlets>
+      <topPortlets/>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+          <id>dashboard_portlet_27471</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
