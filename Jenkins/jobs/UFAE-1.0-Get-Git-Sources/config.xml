@@ -2,7 +2,7 @@
 <project>
   <actions/>
   <description>Download git repository from https://github.com/chenxiaolong/Unity-for-Arch-Extra.git</description>
-  <logRotator>
+  <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>100</numToKeep>
     <artifactDaysToKeep>-1</artifactDaysToKeep>
@@ -17,7 +17,7 @@
       <priority>100</priority>
     </hudson.queueSorter.PrioritySorterJobProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.2.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.3.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -86,7 +86,7 @@ if [ &quot;x${BUILD_ALL}&quot; == &quot;xtrue&quot; ]; then
   CHANGED=$(./What_can_I_update\?.py -l | grep -v &apos;qt-ubuntu&apos;)
 else
   CHANGED=&quot;&quot;
-  for i in $(git diff --name-only $(cat old-commit) $(cat new-commit) | grep &apos;/&apos;); do
+  for i in $(git diff --name-only $(cat old-commit) $(cat new-commit) | grep &apos;/PKGBUILD&apos;); do
     i=${i%/*}
     CHANGED+=&quot; ${i}&quot;
   done
@@ -126,10 +126,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh humanity-icon-theme</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-humanity-icon-theme</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -143,10 +143,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh ubuntu-themes</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-ubuntu-themes</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -160,10 +160,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh ubuntu-wallpapers</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-ubuntu-wallpapers</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -177,10 +177,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh ubuntu-sounds</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-ubuntu-sounds</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -194,10 +194,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh lightdm-ubuntu</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-lightdm-ubuntu</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -211,10 +211,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh accountsservice-ubuntu</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-accountsservice-ubuntu</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -228,10 +228,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh lightdm-unity-greeter</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-lightdm-unity-greeter</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -245,10 +245,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh globalmenu-extension</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-globalmenu-extension</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -262,10 +262,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh messagingmenu-extension</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-messagingmenu-extension</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -279,10 +279,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh liferea-indicator</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-liferea-indicator</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -296,10 +296,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh pidgin-libnotify-ubuntu</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-pidgin-libnotify-ubuntu</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -313,10 +313,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh plasma-widget-menubar</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-plasma-widget-menubar</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -330,10 +330,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh xfce4-indicator-plugin</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-xfce4-indicator-plugin</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -347,10 +347,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh lo-menubar</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-lo-menubar</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -364,10 +364,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh indicator-sync</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-indicator-sync</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -381,10 +381,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh indicator-cpufreq</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-indicator-cpufreq</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -398,10 +398,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh empathy-ubuntu</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-empathy-ubuntu</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -415,10 +415,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh telepathy-indicator</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-telepathy-indicator</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -432,10 +432,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python-polib</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python-polib</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -449,10 +449,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh webapps-applications</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-webapps-applications</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -466,10 +466,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh webapps-greasemonkey</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-webapps-greasemonkey</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -483,10 +483,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh unity-firefox-extension</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-unity-firefox-extension</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -500,10 +500,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh webaccounts-browser-extension</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-webaccounts-browser-extension</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -517,10 +517,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh unity-webapps</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-unity-webapps</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -534,10 +534,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python3-pycurl</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python3-pycurl</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -551,10 +551,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh thin-client-config-agent</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-thin-client-config-agent</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -568,10 +568,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh remote-login-service</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-remote-login-service</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -585,10 +585,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh lightdm-remote-session-uccsconfigure</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-lightdm-remote-session-uccsconfigure</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -602,10 +602,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh libpam-freerdp</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-libpam-freerdp</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -619,10 +619,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh lightdm-remote-session-freerdp</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-lightdm-remote-session-freerdp</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -636,10 +636,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python-shiboken</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python-shiboken</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -653,10 +653,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python-pyside</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python-pyside</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -670,10 +670,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh unity-singlet</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-unity-singlet</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -687,10 +687,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python-keyring</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python-keyring</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -704,10 +704,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python2-oauth2</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python2-oauth2</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -721,10 +721,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python2-magic</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python2-magic</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -738,10 +738,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh python-regex</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-python-regex</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -755,10 +755,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh everpad</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-everpad</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
@@ -772,10 +772,10 @@ mv new-commit old-commit</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh unity-tweak-tool</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.16">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
-                <configs class="java.util.Collections$EmptyList" reference="../../../../../org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher/publisher/configs/hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig/configs"/>
+                <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-unity-tweak-tool</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
