@@ -94,7 +94,9 @@ fi
 
 for i in ${CHANGED}; do
   echo &quot;Package ${i} was changed, will rebuild&quot;
-  echo &quot;build_${i//-/_}=true&quot; &gt;&gt; changed-packages
+  PKG=&quot;${i//-/_}&quot;
+  PKG=&quot;${PKG//./_}&quot;
+  echo &quot;build_${PKG}=true&quot; &gt;&gt; changed-packages
 done
 
 # Make sure nothing is built twice

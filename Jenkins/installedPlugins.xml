@@ -35,7 +35,7 @@
     </entry>
     <entry>
       <string>maven-plugin</string>
-      <string>1.510</string>
+      <string>1.512</string>
     </entry>
     <entry>
       <string>run-condition</string>
@@ -91,7 +91,7 @@
     </entry>
     <entry>
       <string>Hudson core</string>
-      <string>1.510</string>
+      <string>1.512</string>
     </entry>
     <entry>
       <string>dashboard-view</string>
