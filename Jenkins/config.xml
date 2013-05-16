@@ -94,6 +94,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         <hudson.views.BuildButtonColumn/>
       </columns>
       <includeRegex>UFA-.*</includeRegex>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>false</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -138,6 +139,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         <hudson.views.BuildButtonColumn/>
       </columns>
       <includeRegex>UFAE-.*</includeRegex>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>false</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -182,6 +184,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         <hudson.views.BuildButtonColumn/>
       </columns>
       <includeRegex>UFALCD-.*</includeRegex>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>false</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
