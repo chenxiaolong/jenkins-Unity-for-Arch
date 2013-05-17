@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.queueSorter.PrioritySorterJobProperty plugin="PrioritySorter@1.3">
+      <priority>100</priority>
+    </hudson.queueSorter.PrioritySorterJobProperty>
+  </properties>
+  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.5">
+    <parentJobName>UFALCD-1.0-Get-Git-Sources</parentJobName>
+    <criteria>Any</criteria>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+if [ &quot;x$(whoami)&quot; != &quot;xjenkins&quot; ]; then
+  echo &quot;Not running as jenkins user&quot;
+  exit 1
+fi
+
+set -e
+
+TEMP=$(mktemp --tmpdir=$(pwd))
+COMMIT=$(sed -n &apos;s/^_commit=\(.*\)/\1/p&apos; Packages/cnchi/PKGBUILD)
+ORIG=&quot;https://raw.github.com/Antergos/Cnchi/${COMMIT}/data/packages.xml&quot;
+
+cleanup() {
+  rm &quot;${TEMP}&quot;
+}
+
+trap &quot;cleanup&quot; SIGINT SIGTERM SIGKILL EXIT
+
+wget &quot;${ORIG}&quot; -O &quot;${TEMP}&quot;
+
+(filterdiff --strip=2 --include=&apos;a/data/packages.xml&apos; | \
+  sed -e &quot;s/^\([-+]\{3\}\ \)packages.xml/\1$(basename ${TEMP})/g&quot; | \
+  patch -p0) &lt; Packages/cnchi/0001-Modifications-for-Unity-for-Arch.patch
+
+cp &quot;${TEMP}&quot; /var/lib/jenkins/Dropbox/Public/packages.xml
+
+printline() {
+  COLS=80
+  while [ &quot;${COLS}&quot; -gt 0 ]; do
+    echo -n &quot;${1}&quot;
+    let COLS--
+  done
+  echo
+}
+
+printline &apos;-&apos;
+cat &quot;${TEMP}&quot;
+printline &apos;-&apos;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

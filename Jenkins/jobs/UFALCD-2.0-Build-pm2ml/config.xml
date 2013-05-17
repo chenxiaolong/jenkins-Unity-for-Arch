@@ -11,10 +11,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
-      <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>UFALCD-2.0-Build-libtimezonemap
-UFALCD-2.0-Build-py3parted
-UFALCD-2.0-Build-pm2ml</blockingJobs>
+      <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.queueSorter.PrioritySorterJobProperty plugin="PrioritySorter@1.3">
       <priority>100</priority>
@@ -33,12 +30,12 @@ UFALCD-2.0-Build-pm2ml</blockingJobs>
   <builders>
     <hudson.tasks.Shell>
       <command>cd Packages/
-sudo /srv/jenkins/build-wrapper.sh -c /srv/jenkins/UFALCD-build.conf cnchi</command>
+sudo /srv/jenkins/build-wrapper.sh -c /srv/jenkins/UFALCD-build.conf pm2ml</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Packages/cnchi/*.pkg.tar.xz</artifacts>
+      <artifacts>Packages/pm2ml/*.pkg.tar.xz</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
