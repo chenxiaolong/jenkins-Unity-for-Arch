@@ -7,7 +7,9 @@ fi
 
 if [ -f changed-packages ]; then
   source changed-packages
-  if [ "x$(eval echo "\$build_${1//-/_}")" = "xtrue" ]; then
+  PKG=${1//-/_}
+  PKG=${PKG//./_}
+  if [ "x$(eval echo "\$build_${PKG}")" = "xtrue" ]; then
     echo "${1} is in changed-packages. Triggering build..."
     exit 0
   fi

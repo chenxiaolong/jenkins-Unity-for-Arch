@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Download git repository from https://github.com/chenxiaolong/Unity-for-Arch-LiveCD.git</description>
+  <description>Download git repository from https://github.com/chenxiaolong/UnityNext-for-Arch.git</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>100</numToKeep>
@@ -23,7 +23,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name></name>
         <refspec></refspec>
-        <url>https://github.com/chenxiaolong/Unity-for-Arch-LiveCD.git</url>
+        <url>git@github.com:chenxiaolong/UnityNext-for-Arch.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -69,8 +69,6 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-cd Packages
-
 # If this is the first time building, then make sure that we build all of the packages
 if [ ! -f ./old-commit ]; then
   git rev-list --max-count=1 HEAD &gt; old-commit
@@ -93,34 +91,51 @@ else
 fi
 
 for i in ${CHANGED}; do
-  echo &quot;Package ${i} was changed, will rebuild&quot;
   PKG=&quot;${i//-/_}&quot;
   PKG=&quot;${PKG//./_}&quot;
+  if [ &quot;x${BUILD_ALL}&quot; != &quot;xtrue&quot; ]; then
+    COMMIT=$(git log -n 1 --pretty=&apos;%H&apos; ${i}/PKGBUILD)
+    if git log -n 1 --pretty=&apos;%s&apos; ${COMMIT} | grep -q -e &apos;Jenkins autocommit:&apos; -e &quot;Merge\ branch.*tracker-${i}&quot;; then
+      echo &quot;Skipping ${i} (Autobuilt commit) ...&quot;
+      continue
+    fi
+  fi
+  echo &quot;Package ${i} was changed, will rebuild&quot;
   echo &quot;build_${PKG}=true&quot; &gt;&gt; changed-packages
 done
 
-mv new-commit old-commit</command>
+mv new-commit old-commit
+
+echo &quot;BUILD_SOURCE=gitcommit&quot; &gt; commit.prop
+echo &quot;COMMIT=$(cat old-commit)&quot; &gt;&gt; commit.prop
+
+echo &quot;Creating snapshot...&quot;
+find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.5">
-      <workspaceGlob></workspaceGlob>
+      <workspaceGlob>.git</workspaceGlob>
       <criteria>Any</criteria>
       <archiveMethod>TAR</archiveMethod>
       <overrideDefaultExcludes>false</overrideDefaultExcludes>
     </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>snapshot.tar.xz</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
     <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.10">
       <publishers>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
-            <command>cd Packages/
-/srv/jenkins/in-build-list.sh py3parted</command>
+            <command>/srv/jenkins/in-build-list.sh mesa-mir</command>
           </condition>
           <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
-                <projects>UFALCD-2.0-Build-py3parted</projects>
+                <projects>UNFA-2.0-Build-mesa-mir</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
                 <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
@@ -131,14 +146,13 @@ mv new-commit old-commit</command>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
-            <command>cd Packages/
-/srv/jenkins/in-build-list.sh cnchi</command>
+            <command>/srv/jenkins/in-build-list.sh gflags</command>
           </condition>
           <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
-                <projects>UFALCD-2.0-Build-cnchi</projects>
+                <projects>UNFA-2.0-Build-gflags</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
                 <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
@@ -149,14 +163,13 @@ mv new-commit old-commit</command>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
-            <command>cd Packages/
-/srv/jenkins/in-build-list.sh pm2ml</command>
+            <command>/srv/jenkins/in-build-list.sh liburcu</command>
           </condition>
           <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
-                <projects>UFALCD-2.0-Build-pm2ml</projects>
+                <projects>UNFA-2.0-Build-liburcu</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
                 <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
@@ -167,14 +180,96 @@ mv new-commit old-commit</command>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
-            <command>cd Packages/
-/srv/jenkins/in-build-list.sh cnchi</command>
+            <command>/srv/jenkins/in-build-list.sh lttng-ust</command>
           </condition>
           <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
-                <projects>UFALCD-6.0-Update-Installation-Package-List</projects>
+                <projects>UNFA-2.0-Build-lttng-ust</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh mir-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-mir-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh glmark2-mir-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-glmark2-mir-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh runbench-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-runbench-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh xorg-server-mir</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>UNFA-2.0-Build-xorg-server-mir</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
                 <buildAllNodesWithLabel>false</buildAllNodesWithLabel>

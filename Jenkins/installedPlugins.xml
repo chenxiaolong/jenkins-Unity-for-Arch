@@ -30,12 +30,16 @@
       <string>1.1</string>
     </entry>
     <entry>
+      <string>copyartifact</string>
+      <string>1.27</string>
+    </entry>
+    <entry>
       <string>mailer</string>
       <string>1.4</string>
     </entry>
     <entry>
       <string>maven-plugin</string>
-      <string>1.514</string>
+      <string>1.515</string>
     </entry>
     <entry>
       <string>run-condition</string>
@@ -43,7 +47,7 @@
     </entry>
     <entry>
       <string>subversion</string>
-      <string>1.45</string>
+      <string>1.48</string>
     </entry>
     <entry>
       <string>PrioritySorter</string>
@@ -87,23 +91,27 @@
     </entry>
     <entry>
       <string>pam-auth</string>
-      <string>1.0</string>
+      <string>1.1</string>
     </entry>
     <entry>
       <string>Hudson core</string>
-      <string>1.514</string>
-    </entry>
-    <entry>
-      <string>dashboard-view</string>
-      <string>2.5</string>
+      <string>1.515</string>
     </entry>
     <entry>
       <string>git-client</string>
       <string>1.0.6</string>
     </entry>
     <entry>
+      <string>dashboard-view</string>
+      <string>2.6</string>
+    </entry>
+    <entry>
       <string>flexible-publish</string>
       <string>0.10</string>
+    </entry>
+    <entry>
+      <string>ws-cleanup</string>
+      <string>0.14</string>
     </entry>
     <entry>
       <string>git</string>
@@ -120,6 +128,10 @@
     <entry>
       <string>build-blocker-plugin</string>
       <string>1.4-SNAPSHOT (private-02/22/2013 00:37-chenxiaolong)</string>
+    </entry>
+    <entry>
+      <string>bazaar</string>
+      <string>1.22</string>
     </entry>
     <entry>
       <string>conditional-buildstep</string>

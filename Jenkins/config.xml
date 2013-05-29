@@ -74,7 +74,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.5">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch</name>
       <filterExecutors>false</filterExecutors>
@@ -119,7 +119,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.5">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch-Extra</name>
       <filterExecutors>false</filterExecutors>
@@ -164,7 +164,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.5">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch-LiveCD</name>
       <filterExecutors>false</filterExecutors>
@@ -205,6 +205,53 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
           <id>dashboard_portlet_27471</id>
+          <name>Jenkins jobs list</name>
+        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
+      <owner class="hudson" reference="../../.."/>
+      <name>UnityNext-for-Arch</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>UNFA-3.0-Publish-Repo</string>
+        <string>UNFA-5.0-Commit-To-Git</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>UNFA-.*</includeRegex>
+      <recurse>true</recurse>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.stats.StatJobs>
+          <id>dashboard_portlet_20189</id>
+          <name>Job statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatJobs>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_15274</id>
+          <name>Build statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+      </rightPortlets>
+      <topPortlets/>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+          <id>dashboard_portlet_24279</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
