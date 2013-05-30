@@ -5,7 +5,6 @@
 # argv[3] - Repository name
 
 import os
-import re
 import shutil
 import sys
 import tarfile
@@ -32,9 +31,14 @@ def get_pkgs_from_db(repo_path, repo_name):
   repo_db = tarfile.open(repo_path + "/" + repo_name + ".db", 'r')
 
   # Get packages in the repo's database
-  for package in repo_db:
-    if package.isdir():
-      packages.append(package.name)
+  for member in repo_db:
+    if member.isfile() and member.name.endswith('/desc'):
+      fd = repo_db.extractfile(member)
+      content = fd.readlines()
+      for index, line in enumerate(content):
+        if line.decode('UTF-8') == '%FILENAME%\n':
+          packages.append(content[index + 1].decode('UTF-8').strip('\n'))
+          break
 
   repo_db.close()
 
@@ -58,8 +62,7 @@ def check_if_pkgs_exist(repo_path, repo_name):
   for i in db_pkgs:
     found = False
     for j in dir_pkgs:
-      nosuffix = re.sub(r'^(.*)-.*\.pkg\.tar\.xz$', r'\1', j)
-      if i == nosuffix:
+      if i == j:
         package_list.append(j)
         found = True
         break;
@@ -77,8 +80,7 @@ def remove_extra_pkgs(repo_path, repo_name):
   package_files = []
 
   for i in get_pkgs_from_dir(repo_path):
-    nosuffix = re.sub(r'^(.*)-.*\.pkg\.tar\.xz$', r'\1', i)
-    if nosuffix not in db_pkgs:
+    if i not in db_pkgs:
       print(" --> " + i)
       package_files.append(i)
       os.remove(repo_path + "/" + i)
