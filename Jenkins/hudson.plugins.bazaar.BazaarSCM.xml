@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.bazaar.BazaarSCM_-DescriptorImpl plugin="bazaar@1.22">
+  <generation>1</generation>
+  <bzrExe>bzr</bzrExe>
+</hudson.plugins.bazaar.BazaarSCM_-DescriptorImpl>

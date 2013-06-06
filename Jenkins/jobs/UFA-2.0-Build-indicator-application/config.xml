@@ -2,7 +2,7 @@
 <project>
   <actions/>
   <description></description>
-  <logRotator>
+  <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>10</numToKeep>
     <artifactDaysToKeep>-1</artifactDaysToKeep>
@@ -10,7 +10,7 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
       <useBuildBlocker>true</useBuildBlocker>
       <blockingJobs>UFA-2.0-Build-libappindicator
 UFA-2.0-Build-libdbusmenu
@@ -39,6 +39,7 @@ UFA-2.0-Build-libindicator</blockingJobs>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>indicator-application/*.pkg.tar.xz</artifacts>
       <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>
       <childProjects>UFA-3.0-Publish-Repo</childProjects>
@@ -48,6 +49,17 @@ UFA-2.0-Build-libindicator</blockingJobs>
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.14">
+      <deleteDirs>false</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+    </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers/>
 </project>

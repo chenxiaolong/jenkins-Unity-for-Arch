@@ -131,7 +131,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh mesa-mir</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -148,7 +148,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh gflags</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -165,7 +165,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh liburcu</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -182,7 +182,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh lttng-ust</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -199,7 +199,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh mir-bzr</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs>
@@ -221,7 +221,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh glmark2-mir-bzr</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs>
@@ -243,7 +243,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh runbench-bzr</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs>
@@ -265,7 +265,7 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
             <command>/srv/jenkins/in-build-list.sh xorg-server-mir</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>

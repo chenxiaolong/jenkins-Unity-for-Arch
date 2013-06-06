@@ -3,7 +3,7 @@
   <plugins>
     <entry>
       <string>scm-sync-configuration</string>
-      <string>0.0.7</string>
+      <string>0.0.7.1</string>
     </entry>
     <entry>
       <string>ssh-credentials</string>
@@ -35,11 +35,11 @@
     </entry>
     <entry>
       <string>mailer</string>
-      <string>1.4</string>
+      <string>1.5</string>
     </entry>
     <entry>
       <string>maven-plugin</string>
-      <string>1.515</string>
+      <string>1.517</string>
     </entry>
     <entry>
       <string>run-condition</string>
@@ -47,7 +47,7 @@
     </entry>
     <entry>
       <string>subversion</string>
-      <string>1.48</string>
+      <string>1.50</string>
     </entry>
     <entry>
       <string>PrioritySorter</string>
@@ -71,11 +71,11 @@
     </entry>
     <entry>
       <string>cvs</string>
-      <string>2.8</string>
+      <string>2.9</string>
     </entry>
     <entry>
       <string>sectioned-view</string>
-      <string>1.16</string>
+      <string>1.17</string>
     </entry>
     <entry>
       <string>ant</string>
@@ -87,7 +87,7 @@
     </entry>
     <entry>
       <string>parameterized-trigger</string>
-      <string>2.17</string>
+      <string>2.18</string>
     </entry>
     <entry>
       <string>pam-auth</string>
@@ -95,7 +95,7 @@
     </entry>
     <entry>
       <string>Hudson core</string>
-      <string>1.515</string>
+      <string>1.517</string>
     </entry>
     <entry>
       <string>git-client</string>
@@ -123,7 +123,7 @@
     </entry>
     <entry>
       <string>token-macro</string>
-      <string>1.6</string>
+      <string>1.7</string>
     </entry>
     <entry>
       <string>build-blocker-plugin</string>
@@ -135,7 +135,7 @@
     </entry>
     <entry>
       <string>conditional-buildstep</string>
-      <string>1.2.1</string>
+      <string>1.2.2</string>
     </entry>
     <entry>
       <string>thinBackup</string>

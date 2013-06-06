@@ -116,7 +116,7 @@ mv new-commit old-commit</command>
             <command>cd Packages/
 /srv/jenkins/in-build-list.sh py3parted</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -134,7 +134,7 @@ mv new-commit old-commit</command>
             <command>cd Packages/
 /srv/jenkins/in-build-list.sh cnchi</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -152,7 +152,7 @@ mv new-commit old-commit</command>
             <command>cd Packages/
 /srv/jenkins/in-build-list.sh pm2ml</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
@@ -170,7 +170,7 @@ mv new-commit old-commit</command>
             <command>cd Packages/
 /srv/jenkins/in-build-list.sh cnchi</command>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>

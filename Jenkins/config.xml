@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.502</version>
+  <version>1.517</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -42,14 +42,16 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-04-13&lt;/strong&gt;: LiveCD monthly builds are up! Images published at &lt;a href=https://sf.net/p/unity-for-arch&gt;https://sf.net/p/unity-for-arch&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
+  <systemMessage>&lt;strong&gt;2013-06-06&lt;/strong&gt;: Builds should complete a lot faster now! No more copying &gt;1TB of data for a full repo rebuild :)&lt;br /&gt;&lt;br /&gt;&#xd;
+&#xd;
+LiveCD x86_64 weekly builds are published at &lt;a href=https://sf.net/p/unity-for-arch&gt;https://sf.net/p/unity-for-arch&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
 &lt;br /&gt;&lt;br /&gt;&#xd;
 &lt;strong&gt;[Unity-for-Arch]&#xd;
 &lt;br /&gt;&#xd;
 SigLevel = Optional TrustAll&#xd;
 &lt;br /&gt;&#xd;
-  Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch/$arch&#xd;
+Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch/$arch&#xd;
 &lt;br /&gt;&lt;br /&gt;&#xd;
 [Unity-for-Arch-Extra]&#xd;
 &lt;br /&gt;&#xd;
