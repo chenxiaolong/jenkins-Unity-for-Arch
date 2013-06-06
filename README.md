@@ -4,32 +4,35 @@ To set up an identical Jenkins instance, just copy everything in Jenkins/ to the
 
 I have the following plugins installed (which may or may not be required):
 
-* Jenkins Mailer Plugin
-* External Monitor Job Type Plugin
-* LDAP Plugin
-* pam-auth
-* Ant Plugin
-* Javadoc Plugin
-* Token Macro Plugin
-* Maven Integration plugin
-* Build Blocker Plugin (my fork at https://github.com/chenxiaolong/build-blocker-plugin)
-* Run Condition Plugin
-* conditional-buildstep
-* Flexible Publish Plugin
-* Any Build Step Plugin
-* export dynamic job data
-* Jenkins Subversion Plug-in
-* Jenkins SSH Slaves plugin
-* Dashboard View
-* Jenkins Clone Workspace SCM Plug-in
-* Priority Sorter
-* Jenkins GIT client plugin
-* Jenkins Parameterized Trigger plugin
-* Jenkins GIT plugin
-* Jenkins Translation Assistance plugin
-* Sectioned View Plugin
 * AnsiColor
-* SCM Sync Configuration Plugin
-* Fail the Build Plugin
-* ThinBackup
+* Ant Plugin
+* Any Build Step Plugin
+* Build Blocker Plugin (my fork at https://github.com/chenxiaolong/build-blocker-plugin)
+* conditional-buildstep
+* Copy Artifact Plugin
+* Credentials Plugin
+* Dashboard View
+* export dynamic job data
+* External Monitor Job Type Plugin
+* Fail The Build Plugin
+* Flexible Publish Plugin
+* Javadoc Plugin
+* Jenkins Bazaar plugin
+* Jenkins Clone Workspace SCM Plug-in
 * Jenkins CVS Plug-in
+* Jenkins GIT client plugin
+* Jenkins GIT plugin
+* Jenkins Mailer Plugin
+* Jenkins Parameterized Trigger plugin
+* Jenkins SSH Slaves plugin
+* Jenkins Subversion Plug-in
+* Jenkins Translation Assistance plugin
+* Jenkins Workspace Cleanup Plugin
+* LDAP Plugin
+* Maven Integration plugin
+* PAM Authentication plugin
+* Priority Sorter
+* Run Condition Plugin
+* Sectioned View Plugin
+* ThinBackup
+* Token Macro Plugin
