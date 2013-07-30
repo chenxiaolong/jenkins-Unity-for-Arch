@@ -22,7 +22,9 @@ UFA-2.0-Build-libindicator
 UFA-2.0-Build-libunity
 UFA-2.0-Build-libunity-misc
 UFA-2.0-Build-nux
-UFA-2.0-Build-unity-asset-pool</blockingJobs>
+UFA-2.0-Build-unity-asset-pool
+UFA-2.0-Build-xpathselect
+UFA-2.0-Build-hud</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.queueSorter.PrioritySorterJobProperty plugin="PrioritySorter@1.3">
       <priority>100</priority>

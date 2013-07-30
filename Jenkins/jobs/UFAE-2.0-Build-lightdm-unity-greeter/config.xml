@@ -12,7 +12,8 @@
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>UFA-2.0-Build-libindicator
+      <blockingJobs>UFA-2.0-Build-ido
+UFA-2.0-Build-libindicator
 UFAE-2.0-Build-lightdm-ubuntu
 UFAE-2.0-Build-ubuntu-themes
 UFAE-2.0-Build-ubuntu-wallpapers</blockingJobs>
@@ -29,7 +30,7 @@ UFAE-2.0-Build-ubuntu-wallpapers</blockingJobs>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -50,7 +51,7 @@ UFAE-2.0-Build-ubuntu-wallpapers</blockingJobs>
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.14">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.16">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>

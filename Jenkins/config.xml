@@ -76,7 +76,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch</name>
       <filterExecutors>false</filterExecutors>
@@ -84,6 +84,12 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>UFA-2.0-Build-dee-ubuntu</string>
+        <string>UFA-2.0-Build-pocketsphinx</string>
+        <string>UFA-2.0-Build-sphinx-voxforge-en</string>
+        <string>UFA-2.0-Build-sphinxbase</string>
+        <string>UFA-2.0-Build-unity-scopes</string>
+        <string>UFA-2.0-Build-xpathselect</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -121,7 +127,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch-Extra</name>
       <filterExecutors>false</filterExecutors>
@@ -166,7 +172,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
       <owner class="hudson" reference="../../.."/>
       <name>Unity-for-Arch-LiveCD</name>
       <filterExecutors>false</filterExecutors>
@@ -211,7 +217,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.6">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
       <owner class="hudson" reference="../../.."/>
       <name>UnityNext-for-Arch</name>
       <filterExecutors>false</filterExecutors>
@@ -219,7 +225,23 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>UNFA-2.0-Build-lightdm-mir-bzr</string>
+        <string>UNFA-2.0-Build-qt5-3d-git</string>
+        <string>UNFA-2.0-Build-qt5-jsondb-git</string>
+        <string>UNFA-2.0-Build-qt5-location-git</string>
+        <string>UNFA-2.0-Build-qt5-sensors-git</string>
+        <string>UNFA-2.0-Build-sdl2-mir</string>
+        <string>UNFA-2.0-Build-tslib</string>
+        <string>UNFA-2.0-Build-unity-system-compositor-bzr</string>
+        <string>UNFA-2.0-Build-xf86-video-nouveau-mir-bzr</string>
         <string>UNFA-3.0-Publish-Repo</string>
+        <string>UNFA-4.0-Track-lightdm-mir-bzr</string>
+        <string>UNFA-4.0-Track-qt5-3d-git</string>
+        <string>UNFA-4.0-Track-qt5-jsondb-git</string>
+        <string>UNFA-4.0-Track-qt5-location-git</string>
+        <string>UNFA-4.0-Track-qt5-sensors-git</string>
+        <string>UNFA-4.0-Track-unity-system-compositor-bzr</string>
+        <string>UNFA-4.0-Track-xf86-video-nouveau-mir-bzr</string>
         <string>UNFA-5.0-Commit-To-Git</string>
       </jobNames>
       <jobFilters/>

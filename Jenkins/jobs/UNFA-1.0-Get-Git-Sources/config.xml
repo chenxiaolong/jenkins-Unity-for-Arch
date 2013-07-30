@@ -278,6 +278,216 @@ find . -maxdepth 1 -exec tar Jcf snapshot.tar.xz {} \+</command>
           </publisher>
           <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh xf86-video-intel-mir-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-xf86-video-intel-mir-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh xf86-video-nouveau-mir-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-xf86-video-nouveau-mir-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh tslib</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>UNFA-2.0-Build-tslib</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh sdl2-mir</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>UNFA-2.0-Build-sdl2-mir</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh unity-system-compositor-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-unity-system-compositor-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh lightdm-mir-bzr</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-lightdm-mir-bzr</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh qt5-3d-git</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-qt5-3d-git</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh qt5-jsondb-git</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-qt5-jsondb-git</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh qt5-location-git</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-qt5-location-git</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh qt5-sensors-git</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>commit.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>UNFA-2.0-Build-qt5-sensors-git</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
       </publishers>
     </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
   </publishers>

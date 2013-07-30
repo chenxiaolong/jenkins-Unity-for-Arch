@@ -2,12 +2,8 @@
 <org.jvnet.hudson.plugins.thinbackup.backup.PluginList plugin="thinBackup@1.7.2">
   <plugins>
     <entry>
-      <string>scm-sync-configuration</string>
-      <string>0.0.7.1</string>
-    </entry>
-    <entry>
       <string>ssh-credentials</string>
-      <string>0.3</string>
+      <string>0.4</string>
     </entry>
     <entry>
       <string>fail-the-build-plugin</string>
@@ -39,7 +35,7 @@
     </entry>
     <entry>
       <string>maven-plugin</string>
-      <string>1.517</string>
+      <string>1.523</string>
     </entry>
     <entry>
       <string>run-condition</string>
@@ -75,7 +71,7 @@
     </entry>
     <entry>
       <string>sectioned-view</string>
-      <string>1.17</string>
+      <string>1.18</string>
     </entry>
     <entry>
       <string>ant</string>
@@ -83,7 +79,7 @@
     </entry>
     <entry>
       <string>ssh-slaves</string>
-      <string>0.25</string>
+      <string>0.27</string>
     </entry>
     <entry>
       <string>parameterized-trigger</string>
@@ -95,15 +91,15 @@
     </entry>
     <entry>
       <string>Hudson core</string>
-      <string>1.517</string>
+      <string>1.523</string>
     </entry>
     <entry>
       <string>git-client</string>
-      <string>1.0.6</string>
+      <string>1.0.7</string>
     </entry>
     <entry>
       <string>dashboard-view</string>
-      <string>2.6</string>
+      <string>2.8</string>
     </entry>
     <entry>
       <string>flexible-publish</string>
@@ -111,7 +107,7 @@
     </entry>
     <entry>
       <string>ws-cleanup</string>
-      <string>0.14</string>
+      <string>0.16</string>
     </entry>
     <entry>
       <string>git</string>
@@ -119,7 +115,7 @@
     </entry>
     <entry>
       <string>ldap</string>
-      <string>1.4</string>
+      <string>1.5</string>
     </entry>
     <entry>
       <string>token-macro</string>

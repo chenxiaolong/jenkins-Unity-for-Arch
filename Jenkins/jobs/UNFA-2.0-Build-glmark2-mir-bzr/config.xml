@@ -77,12 +77,32 @@ sudo /srv/jenkins/build-wrapper.sh -c /srv/jenkins/UNFA-build.conf glmark2-mir-b
     <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.10">
       <publishers>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition" plugin="run-condition@0.10">
-            <arg1>${BUILD_SOURCE}</arg1>
-            <arg2>autocommit</arg2>
-            <ignoreCase>false</ignoreCase>
+          <condition class="org.jenkins_ci.plugins.run_condition.logic.And" plugin="run-condition@0.10">
+            <conditions>
+              <org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+                <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition">
+                  <worstResult>
+                    <name>SUCCESS</name>
+                    <ordinal>0</ordinal>
+                    <color>BLUE</color>
+                  </worstResult>
+                  <bestResult>
+                    <name>SUCCESS</name>
+                    <ordinal>0</ordinal>
+                    <color>BLUE</color>
+                  </bestResult>
+                </condition>
+              </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+              <org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+                <condition class="org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition">
+                  <arg1>${BUILD_SOURCE}</arg1>
+                  <arg2>autocommit</arg2>
+                  <ignoreCase>false</ignoreCase>
+                </condition>
+              </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+            </conditions>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs>

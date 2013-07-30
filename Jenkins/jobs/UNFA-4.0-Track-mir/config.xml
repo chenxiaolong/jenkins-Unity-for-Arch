@@ -51,7 +51,7 @@
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.17">
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.18">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>

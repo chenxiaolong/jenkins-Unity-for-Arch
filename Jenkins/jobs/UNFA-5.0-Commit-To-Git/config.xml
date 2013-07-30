@@ -59,7 +59,7 @@
   <triggers class="vector"/>
   <concurrentBuild>true</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.2.1">
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.2.2">
       <condition class="org.jenkins_ci.plugins.run_condition.core.ExpressionCondition" plugin="run-condition@0.10">
         <expression>UNFA-4.0-Track-.*</expression>
         <label>${TRACKED}</label>
@@ -241,7 +241,7 @@ git push -u origin ${MASTER}</command>
               </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
             </conditions>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.17">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs>

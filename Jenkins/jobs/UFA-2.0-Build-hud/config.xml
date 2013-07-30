@@ -14,7 +14,11 @@
       <useBuildBlocker>true</useBuildBlocker>
       <blockingJobs>UFA-2.0-Build-bamf
 UFA-2.0-Build-libdbusmenu
-UFA-2.0-Build-indicator-appmenu</blockingJobs>
+UFA-2.0-Build-indicator-appmenu
+UFA-2.0-Build-sphinxbase
+UFA-2.0-Build-pocketsphinx
+UFA-2.0-Build-sphinx-voxforge-en
+UFA-2.0-Build-dee</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.queueSorter.PrioritySorterJobProperty plugin="PrioritySorter@1.3">
       <priority>100</priority>
