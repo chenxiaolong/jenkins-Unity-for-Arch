@@ -27,7 +27,7 @@ UFA-2.0-Build-dee</blockingJobs>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -48,7 +48,7 @@ UFA-2.0-Build-dee</blockingJobs>
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.14">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.16">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>

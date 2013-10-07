@@ -25,10 +25,10 @@ UFALCD-2.0-Build-pm2ml</blockingJobs>
     <criteria>Any</criteria>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -50,7 +50,7 @@ sudo /srv/jenkins/build-wrapper.sh -c /srv/jenkins/UFALCD-build.conf cnchi</comm
         <color>BLUE</color>
       </threshold>
     </hudson.tasks.BuildTrigger>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.14">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.16">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>

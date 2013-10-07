@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.517</version>
+  <version>1.524</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -42,7 +42,10 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-06-06&lt;/strong&gt;: Builds should complete a lot faster now! No more copying &gt;1TB of data for a full repo rebuild :)&lt;br /&gt;&lt;br /&gt;&#xd;
+  <systemMessage>&lt;strong&gt;2013-08-25&lt;/strong&gt;: PSU broke, hopefully this new one won&apos;t...&lt;br /&gt;&lt;br /&gt;&#xd;
+&lt;strong&gt;2013-08-14&lt;/strong&gt;: Now running on two HDDs :)&lt;br /&gt;&lt;br /&gt;&#xd;
+&#xd;
+CyanogenMod 10.2 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 &#xd;
 LiveCD x86_64 weekly builds are published at &lt;a href=https://sf.net/p/unity-for-arch&gt;https://sf.net/p/unity-for-arch&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
@@ -135,6 +138,9 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
+        <string>UFAE-2.0-Build-indicator-remindor</string>
+        <string>UFAE-2.0-Build-remindor-common</string>
+        <string>UFAE-2.0-Build-remindor-qt</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -225,23 +231,12 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>UNFA-2.0-Build-lightdm-mir-bzr</string>
-        <string>UNFA-2.0-Build-qt5-3d-git</string>
-        <string>UNFA-2.0-Build-qt5-jsondb-git</string>
-        <string>UNFA-2.0-Build-qt5-location-git</string>
-        <string>UNFA-2.0-Build-qt5-sensors-git</string>
         <string>UNFA-2.0-Build-sdl2-mir</string>
         <string>UNFA-2.0-Build-tslib</string>
         <string>UNFA-2.0-Build-unity-system-compositor-bzr</string>
-        <string>UNFA-2.0-Build-xf86-video-nouveau-mir-bzr</string>
+        <string>UNFA-2.0-Build-xf86-video-nouveau-mir</string>
         <string>UNFA-3.0-Publish-Repo</string>
-        <string>UNFA-4.0-Track-lightdm-mir-bzr</string>
-        <string>UNFA-4.0-Track-qt5-3d-git</string>
-        <string>UNFA-4.0-Track-qt5-jsondb-git</string>
-        <string>UNFA-4.0-Track-qt5-location-git</string>
-        <string>UNFA-4.0-Track-qt5-sensors-git</string>
         <string>UNFA-4.0-Track-unity-system-compositor-bzr</string>
-        <string>UNFA-4.0-Track-xf86-video-nouveau-mir-bzr</string>
         <string>UNFA-5.0-Commit-To-Git</string>
       </jobNames>
       <jobFilters/>
@@ -276,6 +271,51 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
           <id>dashboard_portlet_24279</id>
+          <name>Jenkins jobs list</name>
+        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
+      <owner class="hudson" reference="../../.."/>
+      <name>Android</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>Android.*</includeRegex>
+      <recurse>false</recurse>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.stats.StatJobs>
+          <id>dashboard_portlet_16944</id>
+          <name>Job statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatJobs>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_13078</id>
+          <name>Build statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+      </rightPortlets>
+      <topPortlets/>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+          <id>dashboard_portlet_2462</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>

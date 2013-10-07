@@ -60,7 +60,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
+      <spec>*/2 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
@@ -762,6 +762,57 @@ mv new-commit old-commit</command>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs class="empty-list"/>
                 <projects>UFAE-2.0-Build-ubuntu-default-settings</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh remindor-common</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>UFAE-2.0-Build-remindor-common</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh remindor-qt</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>UFAE-2.0-Build-remindor-qt</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.contributed.ShellCondition" plugin="run-condition@0.10">
+            <command>/srv/jenkins/in-build-list.sh indicator-remindor</command>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>UFAE-2.0-Build-indicator-remindor</projects>
                 <condition>ALWAYS</condition>
                 <triggerWithNoParameters>false</triggerWithNoParameters>
                 <buildAllNodesWithLabel>false</buildAllNodesWithLabel>

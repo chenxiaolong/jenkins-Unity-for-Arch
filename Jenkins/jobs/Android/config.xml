@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>2</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.queueSorter.PrioritySorterJobProperty plugin="PrioritySorter@1.3">
+      <priority>100</priority>
+    </hudson.queueSorter.PrioritySorterJobProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>ROM</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>cyanogenmod</string>
+              <string>task650_aokp</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>REPO_BRANCH</name>
+          <description>&lt;strong&gt;cm-10.1&lt;/strong&gt; - CyanogenMod&apos;s Android 4.2 branch &lt;strong&gt;(disabled)&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;cm-10.2&lt;/strong&gt; - CyanogenMod&apos;s Android 4.3 branch&lt;br /&gt;
+&lt;strong&gt;jb-4.2&lt;/strong&gt; - Task650&apos;s AOKP&apos;s JellyBean branch</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>cm-10.2</string>
+              <string>jb-4.2</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>LUNCH</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>jflteatt</string>
+              <string>jfltecan</string>
+              <string>jfltecri</string>
+              <string>jfltespr</string>
+              <string>jfltetmo</string>
+              <string>jflteusc</string>
+              <string>jfltevzw</string>
+              <string>jfltexx</string>
+              <string>m7ul</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CM_EXTRAVERSION</name>
+          <description>If this is set, the RELEASE_TYPE will be set to CM_EXPERIMENTAL. Use this to tag your experimental builds.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>RELEASE_TYPE</name>
+          <description>Ignored when builds are started manually.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>CM_EXPERIMENTAL</string>
+              <string>CM_NIGHTLY</string>
+              <string>CM_RELEASE</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CCACHE_DIR</name>
+          <description></description>
+          <defaultValue>/srv/android/ccache</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CCACHE_SIZE</name>
+          <description></description>
+          <defaultValue>50G</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>CLEAN</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>SYNC</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>true</string>
+              <string>false</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>MAKECORES</name>
+          <description>This parameter determines the number of threads to use while building.
+&lt;br /&gt;&lt;br /&gt;
+DEFAULT: Threads = Threads per core * Number of cores
+&lt;br /&gt;
+DOUBLE: Threads = Number of cores * 2
+&lt;br /&gt;
+PLUSONE: Threads = Number of cores + 1</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>DEFAULT</string>
+              <string>DOUBLE</string>
+              <string>PLUSONE</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>PUBLISH</name>
+          <description>Publish build?</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>HUDSON_BRANCH</name>
+          <description>Which branch of https://github.com/chenxiaolong/hudson to use</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>UPDATE_TIMESTAMP</name>
+          <description>The parameter determines whether or not the &quot;last-build&quot; timestamp for the changelog generator should be updated. This should only be enabled for nightly builds.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>GERRIT_CHANGES</name>
+          <description>List of changes IDs/change numbers/URLs from the ROM&apos;s gerrit server to cherrypick (space-delimited)</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>/hd2/android</customWorkspace>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>export LANG=en_US.UTF-8
+
+rm -f jenkins-cli.jar
+wget ${JENKINS_URL}/jnlpJars/jenkins-cli.jar
+
+$JAVA -jar jenkins-cli.jar set-build-display-name ${JOB_NAME} ${BUILD_NUMBER} &quot;${LUNCH}&quot;
+$JAVA -jar jenkins-cli.jar set-build-description ${JOB_NAME} ${BUILD_NUMBER} &quot;${ROM} ${REPO_BRANCH} branch for ${LUNCH}&quot;
+
+curl -O https://raw.github.com/chenxiaolong/hudson/master/job.sh
+
+set +e
+bash ./job.sh
+EXIT=${?}
+
+case ${EXIT} in
+2)
+  $JAVA -jar jenkins-cli.jar set-build-result aborted
+  exit 0
+  ;;
+*)
+  exit ${EXIT}
+  ;;
+esac</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>archive/*</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.10">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition" plugin="run-condition@0.10">
+            <arg1>${PUBLISH}</arg1>
+            <arg2>true</arg2>
+            <ignoreCase>false</ignoreCase>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs class="empty-list"/>
+                <projects>Android_Publish_Build</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.3.1">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+  </buildWrappers>
+</project>
