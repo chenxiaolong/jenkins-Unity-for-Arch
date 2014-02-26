@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.524</version>
+  <version>1.542</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -39,15 +39,14 @@
     <disableSignup>true</disableSignup>
     <enableCaptcha>false</enableCaptcha>
   </securityRealm>
+  <disableRememberMe>false</disableRememberMe>
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-08-25&lt;/strong&gt;: PSU broke, hopefully this new one won&apos;t...&lt;br /&gt;&lt;br /&gt;&#xd;
-&lt;strong&gt;2013-08-14&lt;/strong&gt;: Now running on two HDDs :)&lt;br /&gt;&lt;br /&gt;&#xd;
+  <systemMessage>&lt;strong&gt;2013-12-04&lt;/strong&gt;: Recovered from DDOS. Hopefully, this will stay up and running&lt;br /&gt;&lt;br /&gt;&#xd;
 &#xd;
-CyanogenMod 10.2 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
+CyanogenMod 11.0 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 &#xd;
-LiveCD x86_64 weekly builds are published at &lt;a href=https://sf.net/p/unity-for-arch&gt;https://sf.net/p/unity-for-arch&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
 The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
 &lt;br /&gt;&lt;br /&gt;&#xd;
 &lt;strong&gt;[Unity-for-Arch]&#xd;
@@ -68,7 +67,9 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds/>
-  <slaves/>
+  <slaves>
+    <!-- REMOVED -->
+  </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
   <views>
@@ -180,51 +181,6 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
     </hudson.plugins.view.dashboard.Dashboard>
     <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
       <owner class="hudson" reference="../../.."/>
-      <name>Unity-for-Arch-LiveCD</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator"/>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <hudson.views.JobColumn/>
-        <hudson.views.LastSuccessColumn/>
-        <hudson.views.LastFailureColumn/>
-        <hudson.views.LastDurationColumn/>
-        <hudson.views.BuildButtonColumn/>
-      </columns>
-      <includeRegex>UFALCD-.*</includeRegex>
-      <recurse>false</recurse>
-      <useCssStyle>false</useCssStyle>
-      <includeStdJobList>false</includeStdJobList>
-      <leftPortletWidth>50%</leftPortletWidth>
-      <rightPortletWidth>50%</rightPortletWidth>
-      <leftPortlets>
-        <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_23602</id>
-          <name>Job statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatJobs>
-      </leftPortlets>
-      <rightPortlets>
-        <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_29818</id>
-          <name>Build statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatBuilds>
-      </rightPortlets>
-      <topPortlets/>
-      <bottomPortlets>
-        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_27471</id>
-          <name>Jenkins jobs list</name>
-        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-      </bottomPortlets>
-    </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
-      <owner class="hudson" reference="../../.."/>
       <name>UnityNext-for-Arch</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
@@ -275,54 +231,9 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
-      <owner class="hudson" reference="../../.."/>
-      <name>Android</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator"/>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <hudson.views.JobColumn/>
-        <hudson.views.LastSuccessColumn/>
-        <hudson.views.LastFailureColumn/>
-        <hudson.views.LastDurationColumn/>
-        <hudson.views.BuildButtonColumn/>
-      </columns>
-      <includeRegex>Android.*</includeRegex>
-      <recurse>false</recurse>
-      <useCssStyle>false</useCssStyle>
-      <includeStdJobList>false</includeStdJobList>
-      <leftPortletWidth>50%</leftPortletWidth>
-      <rightPortletWidth>50%</rightPortletWidth>
-      <leftPortlets>
-        <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_16944</id>
-          <name>Job statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatJobs>
-      </leftPortlets>
-      <rightPortlets>
-        <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_13078</id>
-          <name>Build statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatBuilds>
-      </rightPortlets>
-      <topPortlets/>
-      <bottomPortlets>
-        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_2462</id>
-          <name>Jenkins jobs list</name>
-        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-      </bottomPortlets>
-    </hudson.plugins.view.dashboard.Dashboard>
   </views>
   <primaryView>All</primaryView>
-  <slaveAgentPort>0</slaveAgentPort>
+  <slaveAgentPort>19283</slaveAgentPort>
   <label></label>
   <nodeProperties/>
   <globalNodeProperties/>

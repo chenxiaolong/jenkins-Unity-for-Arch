@@ -1,1 +1,6 @@
 Jenkins/users/
+Scripts/build-in-chroot.sh
+Scripts/cache.lock
+Jenkins/credentials.xml
+Jenkins/jobs/Android
+Jenkins/jobs/DualBoot_Patcher
