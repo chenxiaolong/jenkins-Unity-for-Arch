@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>true</useBuildBlocker>
+      <blockingJobs>ArchLinux_UnityForArch.*Git</blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>PACKAGE</name>
+          <description>The package to build</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>CONFIG</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>UFA-build</string>
+              <string>UFA-build-GNOME312</string>
+              <string>UFAE-build</string>
+              <string>UFAE-build-GNOME312</string>
+              <string>UNFA-build</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>UPSTREAM_JOB</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.plugins.copyartifact.BuildSelectorParameter plugin="copyartifact@1.30">
+          <name>BUILD_SELECTOR</name>
+          <description></description>
+          <defaultSelector class="hudson.plugins.copyartifact.TriggeredBuildSelector"/>
+        </hudson.plugins.copyartifact.BuildSelectorParameter>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.2">
+      <maxConcurrentPerNode>0</maxConcurrentPerNode>
+      <maxConcurrentTotal>0</maxConcurrentTotal>
+      <categories/>
+      <throttleEnabled>false</throttleEnabled>
+      <throttleOption>project</throttleOption>
+      <configVersion>1</configVersion>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>${UPSTREAM_JOB}</project>
+      <filter>snapshot.tar.gz</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.ParameterizedBuildSelector">
+        <parameterName>BUILD_SELECTOR</parameterName>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+export JENKINS_URL=&quot;http://127.0.0.1:8090&quot;
+
+if [[ -z &quot;${PACKAGE}&quot; ]]; then
+    echo &quot;PACKAGE must be set to something&quot;
+    exit 1
+fi
+
+tar zxvf snapshot.tar.gz
+
+VERSION=$(source ${PACKAGE}/PKGBUILD &amp;&amp; eval &quot;echo \$pkgver&quot;)
+RELEASE=$(source ${PACKAGE}/PKGBUILD &amp;&amp; eval &quot;echo \$pkgrel&quot;)
+
+wget &quot;${JENKINS_URL/https/http}/jnlpJars/jenkins-cli.jar&quot;
+
+java -jar jenkins-cli.jar ${key} set-build-display-name \
+    ${JOB_NAME} ${BUILD_NUMBER} &quot;${PACKAGE}&quot;
+java -jar jenkins-cli.jar ${key} set-build-description \
+    ${JOB_NAME} ${BUILD_NUMBER} &quot;[${CONFIG}] ${VERSION}-${RELEASE}&quot;
+
+sudo /srv/jenkins/build-wrapper.sh --config /srv/jenkins/${CONFIG}.conf ${PACKAGE}</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>${PACKAGE}/*.pkg.tar.xz</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.20">
+      <deleteDirs>false</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.12">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+            <worstResult>
+              <name>SUCCESS</name>
+              <ordinal>0</ordinal>
+              <color>BLUE</color>
+              <completeBuild>true</completeBuild>
+            </worstResult>
+            <bestResult>
+              <name>SUCCESS</name>
+              <ordinal>0</ordinal>
+              <color>BLUE</color>
+              <completeBuild>true</completeBuild>
+            </bestResult>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.BuildTrigger" plugin="parameterized-trigger@2.24">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+                    <properties>CONFIG=${CONFIG}</properties>
+                  </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+                </configs>
+                <projects>ArchLinux_Publish_Repo, </projects>
+                <condition>SUCCESS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+              </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

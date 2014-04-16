@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
-  <disabledAdministrativeMonitors/>
-  <version>1.542</version>
+  <disabledAdministrativeMonitors>
+    <string>hudson.diagnosis.ReverseProxySetupMonitor</string>
+  </disabledAdministrativeMonitors>
+  <version>1.558</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -43,24 +45,7 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <systemMessage>&lt;strong&gt;2013-12-04&lt;/strong&gt;: Recovered from DDOS. Hopefully, this will stay up and running&lt;br /&gt;&lt;br /&gt;&#xd;
-&#xd;
-CyanogenMod 11.0 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;&#xd;
-&#xd;
-The Unity-for-Arch and Unity-for-Arch-Extra packages are pushed to the repositories as soon as they are built. To use them just add the following to /etc/pacman.conf:&#xd;
-&lt;br /&gt;&lt;br /&gt;&#xd;
-&lt;strong&gt;[Unity-for-Arch]&#xd;
-&lt;br /&gt;&#xd;
-SigLevel = Optional TrustAll&#xd;
-&lt;br /&gt;&#xd;
-Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch/$arch&#xd;
-&lt;br /&gt;&lt;br /&gt;&#xd;
-[Unity-for-Arch-Extra]&#xd;
-&lt;br /&gt;&#xd;
-SigLevel = Optional TrustAll&#xd;
-&lt;br /&gt;&#xd;
-Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/strong&gt;</systemMessage>
-  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter">
+  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter" plugin="antisamy-markup-formatter@1.0">
     <disableSyntaxHighlighting>false</disableSyntaxHighlighting>
   </markupFormatter>
   <jdks/>
@@ -68,7 +53,35 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds/>
   <slaves>
-    <!-- REMOVED -->
+    <slave>
+      <name>VM_woodburyman</name>
+      <description>woodburyman&apos;s Ubuntu VM</description>
+      <remoteFS>/home/woodburyman/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
+        <host>grudzien.no-ip.org</host>
+        <port>20132</port>
+        <credentialsId>0fa59e7b-5139-40bf-8674-3efb60c8aa59</credentialsId>
+        <javaPath>/usr/bin/java</javaPath>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>chenxiaolong</userId>
+    </slave>
+    <slave>
+      <name>Laptop_cxl-4270cto</name>
+      <description>My Laptop</description>
+      <remoteFS>/stuff/chenxiaolong/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+      <userId>chenxiaolong</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
@@ -76,24 +89,38 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
     <hudson.model.AllView>
       <owner class="hudson" reference="../../.."/>
       <name>All</name>
+      <description>&lt;br /&gt;&#xd;
+CyanogenMod 11.0 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&#xd;
+&lt;hr /&gt;&#xd;
+Dual Boot Patcher experimental versions are published here: &lt;a href=http://dl.dropbox.com/u/486665/Snapshots/DualBootPatcher/index.html&gt;http://dl.dropbox.com/u/486665/Snapshots/DualBootPatcher/index.html&lt;/a&gt;&#xd;
+&lt;hr /&gt;&#xd;
+To use the Unity-for-Arch repos, add the following to /etc/pacman.conf before &lt;b&gt;[community]&lt;/b&gt;:&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+&lt;strong&gt;[Unity-for-Arch]&#xd;
+&lt;br /&gt;&#xd;
+SigLevel = Optional TrustAll&#xd;
+&lt;br /&gt;&#xd;
+Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+[Unity-for-Arch-Extra]&#xd;
+&lt;br /&gt;&#xd;
+SigLevel = Optional TrustAll&#xd;
+&lt;br /&gt;&#xd;
+Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch&lt;/strong&gt;&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-Arch-Extra)&lt;/b&gt;</description>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
       <owner class="hudson" reference="../../.."/>
-      <name>Unity-for-Arch</name>
+      <name>Arch Linux</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>UFA-2.0-Build-dee-ubuntu</string>
-        <string>UFA-2.0-Build-pocketsphinx</string>
-        <string>UFA-2.0-Build-sphinx-voxforge-en</string>
-        <string>UFA-2.0-Build-sphinxbase</string>
-        <string>UFA-2.0-Build-unity-scopes</string>
-        <string>UFA-2.0-Build-xpathselect</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -105,7 +132,7 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
         <hudson.views.LastDurationColumn/>
         <hudson.views.BuildButtonColumn/>
       </columns>
-      <includeRegex>UFA-.*</includeRegex>
+      <includeRegex>ArchLinux_.*</includeRegex>
       <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>false</includeStdJobList>
@@ -113,73 +140,25 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <rightPortletWidth>50%</rightPortletWidth>
       <leftPortlets>
         <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_7133</id>
+          <id>dashboard_portlet_27251</id>
           <name>Job statistics</name>
         </hudson.plugins.view.dashboard.stats.StatJobs>
       </leftPortlets>
       <rightPortlets>
         <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_30578</id>
+          <id>dashboard_portlet_26535</id>
           <name>Build statistics</name>
         </hudson.plugins.view.dashboard.stats.StatBuilds>
       </rightPortlets>
       <topPortlets/>
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_22902</id>
+          <id>dashboard_portlet_10780</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
-      <owner class="hudson" reference="../../.."/>
-      <name>Unity-for-Arch-Extra</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
-        <string>UFAE-2.0-Build-indicator-remindor</string>
-        <string>UFAE-2.0-Build-remindor-common</string>
-        <string>UFAE-2.0-Build-remindor-qt</string>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <hudson.views.JobColumn/>
-        <hudson.views.LastSuccessColumn/>
-        <hudson.views.LastFailureColumn/>
-        <hudson.views.LastDurationColumn/>
-        <hudson.views.BuildButtonColumn/>
-      </columns>
-      <includeRegex>UFAE-.*</includeRegex>
-      <recurse>false</recurse>
-      <useCssStyle>false</useCssStyle>
-      <includeStdJobList>false</includeStdJobList>
-      <leftPortletWidth>50%</leftPortletWidth>
-      <rightPortletWidth>50%</rightPortletWidth>
-      <leftPortlets>
-        <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_2197</id>
-          <name>Job statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatJobs>
-      </leftPortlets>
-      <rightPortlets>
-        <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_10293</id>
-          <name>Build statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatBuilds>
-      </rightPortlets>
-      <topPortlets/>
-      <bottomPortlets>
-        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_720</id>
-          <name>Jenkins jobs list</name>
-        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-      </bottomPortlets>
-    </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.8">
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
       <owner class="hudson" reference="../../.."/>
       <name>UnityNext-for-Arch</name>
       <filterExecutors>false</filterExecutors>
@@ -227,6 +206,51 @@ Server = http://dl.dropbox.com/u/486665/Repos/Unity-for-Arch-Extra/$arch&lt;/str
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
           <id>dashboard_portlet_24279</id>
+          <name>Jenkins jobs list</name>
+        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>Android</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>Android.*</includeRegex>
+      <recurse>false</recurse>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.stats.StatJobs>
+          <id>dashboard_portlet_16944</id>
+          <name>Job statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatJobs>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_13078</id>
+          <name>Build statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+      </rightPortlets>
+      <topPortlets/>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+          <id>dashboard_portlet_2462</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>

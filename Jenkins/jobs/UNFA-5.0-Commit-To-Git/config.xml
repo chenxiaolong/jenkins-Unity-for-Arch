@@ -13,9 +13,6 @@
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
-    <hudson.queueSorter.PrioritySorterJobProperty plugin="PrioritySorter@1.3">
-      <priority>100</priority>
-    </hudson.queueSorter.PrioritySorterJobProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.TextParameterDefinition>
@@ -28,7 +25,7 @@
           <description>Build number</description>
           <defaultValue>(manual)</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.plugins.copyartifact.BuildSelectorParameter plugin="copyartifact@1.27">
+        <hudson.plugins.copyartifact.BuildSelectorParameter plugin="copyartifact@1.30">
           <name>BUILD_SELECTOR</name>
           <description></description>
           <defaultSelector class="hudson.plugins.copyartifact.TriggeredBuildSelector"/>
@@ -59,26 +56,28 @@
   <triggers/>
   <concurrentBuild>true</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.2.2">
-      <condition class="org.jenkins_ci.plugins.run_condition.core.ExpressionCondition" plugin="run-condition@0.10">
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.ExpressionCondition" plugin="run-condition@1.0">
         <expression>UNFA-4.0-Track-.*</expression>
         <label>${TRACKED}</label>
       </condition>
-      <buildStep class="hudson.plugins.copyartifact.CopyArtifact" plugin="copyartifact@1.27">
+      <buildStep class="hudson.plugins.copyartifact.CopyArtifact" plugin="copyartifact@1.30">
         <project>${TRACKED}</project>
         <filter>jenkins.PKGBUILD</filter>
         <target></target>
         <selector class="hudson.plugins.copyartifact.ParameterizedBuildSelector">
           <parameterName>BUILD_SELECTOR</parameterName>
         </selector>
+        <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
       </buildStep>
-      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.27">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>UNFA-1.0-Get-Git-Sources</project>
       <filter>snapshot.tar.xz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -180,10 +179,10 @@ git push -u origin ${MASTER}</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.10">
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.12">
       <publishers>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.logic.And" plugin="run-condition@0.10">
+          <condition class="org.jenkins_ci.plugins.run_condition.logic.And" plugin="run-condition@1.0">
             <conditions>
               <org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
                 <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition">
@@ -191,11 +190,13 @@ git push -u origin ${MASTER}</command>
                     <name>SUCCESS</name>
                     <ordinal>0</ordinal>
                     <color>BLUE</color>
+                    <completeBuild>true</completeBuild>
                   </worstResult>
                   <bestResult>
                     <name>SUCCESS</name>
                     <ordinal>0</ordinal>
                     <color>BLUE</color>
+                    <completeBuild>true</completeBuild>
                   </bestResult>
                 </condition>
               </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
@@ -213,10 +214,10 @@ git push -u origin ${MASTER}</command>
             <latestOnly>false</latestOnly>
             <allowEmptyArchive>false</allowEmptyArchive>
           </publisher>
-          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
         <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
-          <condition class="org.jenkins_ci.plugins.run_condition.logic.And" plugin="run-condition@0.10">
+          <condition class="org.jenkins_ci.plugins.run_condition.logic.And" plugin="run-condition@1.0">
             <conditions>
               <org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
                 <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition">
@@ -224,11 +225,13 @@ git push -u origin ${MASTER}</command>
                     <name>SUCCESS</name>
                     <ordinal>0</ordinal>
                     <color>BLUE</color>
+                    <completeBuild>true</completeBuild>
                   </worstResult>
                   <bestResult>
                     <name>SUCCESS</name>
                     <ordinal>0</ordinal>
                     <color>BLUE</color>
+                    <completeBuild>true</completeBuild>
                   </bestResult>
                 </condition>
               </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
@@ -241,13 +244,15 @@ git push -u origin ${MASTER}</command>
               </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
             </conditions>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.18">
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.24">
             <configs>
               <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
                 <configs>
                   <hudson.plugins.parameterizedtrigger.FileBuildParameters>
                     <propertiesFile>commit.prop</propertiesFile>
                     <failTriggerOnMissing>false</failTriggerOnMissing>
+                    <useMatrixChild>false</useMatrixChild>
+                    <onlyExactRuns>false</onlyExactRuns>
                   </hudson.plugins.parameterizedtrigger.FileBuildParameters>
                   <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
                     <properties>BUILD_SOURCE=autocommit</properties>
@@ -260,11 +265,11 @@ git push -u origin ${MASTER}</command>
               </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             </configs>
           </publisher>
-          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@0.10"/>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
         </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
       </publishers>
     </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.16">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.20">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>

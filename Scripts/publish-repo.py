@@ -110,6 +110,17 @@ if os.path.exists(repo_remote + "/" + repo + ".db"):
   os.remove(repo_remote + "/" + repo + ".db")
 os.symlink(db_compressed, repo_remote + "/" + repo + ".db")
 
+# Copy files database
+print("Copying files database...")
+files_compressed = os.readlink(repo_local + "/" + repo + ".files")
+print(" --> " + repo + ".files.tar.xz")
+shutil.copyfile(repo_local + "/" + files_compressed,
+                repo_remote + "/" + files_compressed)
+print(" --> " + repo + ".files")
+if os.path.exists(repo_remote + "/" + repo + ".files"):
+  os.remove(repo_remote + "/" + repo + ".files")
+os.symlink(files_compressed, repo_remote + "/" + repo + ".files")
+
 # Make sure all of the packages in the remote repo exist
 print("Removing old packages from remote repo...")
 remove_extra_pkgs(repo_remote, repo)

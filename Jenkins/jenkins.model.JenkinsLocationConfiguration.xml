@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jenkins.model.JenkinsLocationConfiguration>
   <adminAddress>chenxiaolong@cxl.epac.to</adminAddress>
-  <jenkinsUrl>http://jenkins.cxl.epac.to/</jenkinsUrl>
+  <jenkinsUrl>https://jenkins.cxl.epac.to/</jenkinsUrl>
 </jenkins.model.JenkinsLocationConfiguration>

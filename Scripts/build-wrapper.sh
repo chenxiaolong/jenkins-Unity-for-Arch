@@ -66,6 +66,7 @@ if [ "x${ARCH_PACKAGE}" = "xany" ]; then
         rm -f ${COPY_TO}/*.files*
         cp ${COPY_FROM}/*-any.pkg.tar.xz ${COPY_TO}/
         repo-add ${COPY_TO}/${REPO}.db.tar.xz ${COPY_TO}/*.pkg.tar.xz
+        repo-add -f ${COPY_TO}/${REPO}.files.tar.xz ${COPY_TO}/*.pkg.tar.xz
       ) 234>${COPY_TO}/repo.lock
     done
   ) 123>${COPY_FROM}/repo.lock
