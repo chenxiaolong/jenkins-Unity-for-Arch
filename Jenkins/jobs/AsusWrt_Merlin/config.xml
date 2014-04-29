@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Cancel:woodburyman</permission>
+      <permission>hudson.model.Run.Update:woodburyman</permission>
+      <permission>hudson.model.Item.Discover:woodburyman</permission>
+      <permission>hudson.model.Run.Delete:woodburyman</permission>
+      <permission>hudson.model.Item.Configure:woodburyman</permission>
+      <permission>hudson.model.Item.Build:woodburyman</permission>
+      <permission>hudson.model.Item.Read:woodburyman</permission>
+      <permission>hudson.model.Item.Delete:woodburyman</permission>
+      <permission>hudson.model.Item.Workspace:woodburyman</permission>
+      <permission>hudson.scm.SCM.Tag:woodburyman</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>DEVICE</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>RT-AC66U</string>
+              <string>RT-AC68U</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>FORCE</name>
+          <description>If this is selected, the build will run even if there were no new changes upstream.</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>CLEAN</name>
+          <description>Clean up build directories?</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.2">
+      <maxConcurrentPerNode>0</maxConcurrentPerNode>
+      <maxConcurrentTotal>0</maxConcurrentTotal>
+      <throttleEnabled>false</throttleEnabled>
+      <throttleOption>project</throttleOption>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.1">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/RMerl/asuswrt-merlin.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+export JENKINS_URL=&quot;http://127.0.0.1:8090&quot;
+
+# Workaround bug: https://github.com/RMerl/asuswrt-merlin/issues/421
+export PKG_CONFIG_LIBDIR=abcdefghijklmnopqrstuvwxyz
+
+# Set up PATH for toolchain and other tools
+export PATH=&quot;${PATH}:$(pwd)/tools/brcm/hndtools-mipsel-linux/bin&quot;
+export PATH=&quot;${PATH}:$(pwd)/tools/brcm/hndtools-mipsel-uclibc/bin&quot;
+export PATH=&quot;${PATH}:$(pwd)/release/src-rt-6.x.4708/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin&quot;
+
+# Set up description
+rm -f jenkins-cli.jar
+wget &quot;${JENKINS_URL/https/http}/jnlpJars/jenkins-cli.jar&quot;
+java -jar jenkins-cli.jar ${key} set-build-display-name \
+    ${JOB_NAME} ${BUILD_NUMBER} &quot;${DEVICE}&quot;
+
+# Check if we should build
+rm -f abort
+build=false
+oldfile=&quot;${DEVICE}-old-commit&quot;
+newfile=&quot;${DEVICE}-new-commit&quot;
+
+# Forced build
+if [[ &quot;${FORCE}&quot; == &quot;true&quot; ]]; then
+    build=true
+fi
+
+# No prior build
+if [[ ! -f ./${oldfile} ]]; then
+    echo &quot;(none)&quot; &gt; ./${oldfile}
+    build=true
+fi
+
+git rev-list --max-count=1 HEAD &gt; ${newfile}
+oldcommit=$(cat ./${oldfile})
+newcommit=$(cat ./${newfile})
+if [[ &quot;${oldcommit}&quot; != &quot;${newcommit}&quot; ]]; then
+    build=true
+fi
+
+if [[ &quot;${build}&quot; == &quot;false&quot; ]]; then
+    echo &quot;Build will not continue because there were no upstream git changes&quot;
+    java -jar jenkins-cli.jar ${key} set-build-description \
+        ${JOB_NAME} ${BUILD_NUMBER} &quot;Cancelled: No new changes&quot;
+    touch abort
+    exit 1
+fi
+
+echo &quot;Prior commit: ${oldcommit}&quot;
+echo &quot;Current commit: ${newcommit}&quot;
+
+# Clean up git repos
+git reset --hard HEAD
+pushd release
+if [[ &quot;${CLEAN}&quot; == true ]]; then
+    git clean -fdx .
+fi
+popd
+
+# Pick device
+case &quot;${DEVICE}&quot; in
+RT-AC66U)
+    dirname=&quot;src-rt-6.x&quot;
+    maketarget=&quot;rt-ac66u&quot;
+    ;;
+RT-AC68U)
+    dirname=&quot;src-rt-6.x.4708&quot;
+    maketarget=&quot;rt-ac68u&quot;
+    ;;
+*)
+    echo &quot;Device ${DEVICE} is not set up for building on this machine.&quot;
+    exit 1
+esac
+
+# Apply patches
+base64 -d &lt;&lt; EOF | patch -p1
+ZGlmZiAtLWdpdCBhL3JlbGVhc2Uvc3JjL3JvdXRlci9NYWtlZmlsZSBiL3JlbGVhc2Uvc3JjL3Jv
+dXRlci9NYWtlZmlsZQppbmRleCBhYzYzYjdkLi5hZGE0MGJhIDEwMDc1NQotLS0gYS9yZWxlYXNl
+L3NyYy9yb3V0ZXIvTWFrZWZpbGUKKysrIGIvcmVsZWFzZS9zcmMvcm91dGVyL01ha2VmaWxlCkBA
+IC0yMTE4LDExICsyMTE4LDEyIEBAIGVuZGlmCiBmbGFjL3N0YW1wLWgxOiBsaWJvZ2cKIAljZCBm
+bGFjICYmIFwKIAlDRkxBR1M9Ii1PcyAkKEVYVFJBQ0ZMQUdTKSAtZlBJQyAtZmZ1bmN0aW9uLXNl
+Y3Rpb25zIC1mZGF0YS1zZWN0aW9ucyIgXAotCUNQUEZMQUdTPSItSSQoVE9QKS9saWJvZ2cvaW5j
+bHVkZSIgXAotCUxERkxBR1M9Ii1MJChUT1ApL2xpYm9nZy9zcmMvLmxpYnMgLWZQSUMgLWZmdW5j
+dGlvbi1zZWN0aW9ucyAtZmRhdGEtc2VjdGlvbnMgLVdsLC0tZ2Mtc2VjdGlvbnMiIFwKKwlMREZM
+QUdTPSItZlBJQyAtZmZ1bmN0aW9uLXNlY3Rpb25zIC1mZGF0YS1zZWN0aW9ucyAtV2wsLS1nYy1z
+ZWN0aW9ucyIgXAogCSQoQ09ORklHVVJFKSAtLWVuYWJsZS1zaGFyZWQgLS1lbmFibGUtc3RhdGlj
+IC0tcHJlZml4PScnIC0tZGlzYWJsZS1ycGF0aCBcCiAJCS0tZGlzYWJsZS1kb3h5Z2VuLWRvY3Mg
+LS1kaXNhYmxlLXhtbXMtcGx1Z2luIC0tZGlzYWJsZS1jcHBsaWJzIFwKLQkJLS13aXRob3V0LWxp
+Ymljb252LXByZWZpeCAtLWRpc2FibGUtYWx0aXZlYyAtLWRpc2FibGUtM2Rub3cgLS1kaXNhYmxl
+LXNzZQorCQktLXdpdGhvdXQtbGliaWNvbnYtcHJlZml4IC0tZGlzYWJsZS1hbHRpdmVjIC0tZGlz
+YWJsZS0zZG5vdyAtLWRpc2FibGUtc3NlIFwKKwkJLS13aXRoLW9nZy1saWJyYXJpZXM9JChUT1Ap
+L2xpYm9nZy9zcmMvLmxpYnMgXAorCQktLXdpdGgtb2dnLWluY2x1ZGVzPSQoVE9QKS9saWJvZ2cv
+aW5jbHVkZQogCXRvdWNoICRACiAKIGZsYWM6IGZsYWMvc3RhbXAtaDEgbGlib2dnCg==
+EOF
+
+# Clean up directories
+find release -mindepth 2 -maxdepth 2 -type d -name image -exec rm -rf {} \;
+pushd release/${dirname}
+if [[ &quot;${CLEAN}&quot; == true ]]; then
+    make clean
+fi
+rm image/*.trx
+
+# Start build!
+make &quot;${maketarget}&quot;
+popd
+
+# Clean up changed files so git pull won&apos;t fail next time
+git reset --hard HEAD
+
+if ls release/${dirname}/image/*.trx; then
+    mv ${newfile} ${oldfile}
+fi</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.12">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
+            <file>abort</file>
+            <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
+          </condition>
+          <publisher class="org.jenkins_ci.plugins.fail_the_build.FixResultBuilder" plugin="fail-the-build-plugin@1.0">
+            <defaultResultName>ABORTED</defaultResultName>
+            <success></success>
+            <unstable></unstable>
+            <failure></failure>
+            <aborted></aborted>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+            <worstResult>
+              <name>SUCCESS</name>
+              <ordinal>0</ordinal>
+              <color>BLUE</color>
+              <completeBuild>true</completeBuild>
+            </worstResult>
+            <bestResult>
+              <name>SUCCESS</name>
+              <ordinal>0</ordinal>
+              <color>BLUE</color>
+              <completeBuild>true</completeBuild>
+            </bestResult>
+          </condition>
+          <publisher class="hudson.tasks.ArtifactArchiver">
+            <artifacts>release/*/image/*.trx</artifacts>
+            <latestOnly>false</latestOnly>
+            <allowEmptyArchive>false</allowEmptyArchive>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

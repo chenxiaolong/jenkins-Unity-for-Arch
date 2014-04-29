@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Build Merlin&apos;s AsusWrt for RT-AC66U and RT-AC68U every night at 3:00 AM EST</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Workspace:woodburyman</permission>
+      <permission>hudson.model.Run.Delete:woodburyman</permission>
+      <permission>hudson.model.Item.Read:woodburyman</permission>
+      <permission>hudson.model.Item.Configure:woodburyman</permission>
+      <permission>hudson.scm.SCM.Tag:woodburyman</permission>
+      <permission>hudson.model.Item.Discover:woodburyman</permission>
+      <permission>hudson.model.Item.Delete:woodburyman</permission>
+      <permission>hudson.model.Run.Update:woodburyman</permission>
+      <permission>hudson.model.Item.Cancel:woodburyman</permission>
+      <permission>hudson.model.Item.Build:woodburyman</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.2">
+      <maxConcurrentPerNode>0</maxConcurrentPerNode>
+      <maxConcurrentTotal>0</maxConcurrentTotal>
+      <throttleEnabled>false</throttleEnabled>
+      <throttleOption>project</throttleOption>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>0 3 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+set -x
+
+export JENKINS_URL=&quot;http://127.0.0.1:8090&quot;
+
+JAVA=/usr/bin/java
+
+rm -f jenkins-cli.jar
+wget ${JENKINS_URL}/jnlpJars/jenkins-cli.jar
+
+DEVICES=(
+    &apos;RT-AC66U&apos;
+    &apos;RT-AC68U&apos;
+)
+
+PARAMS=(
+#  &apos;-p&apos; &apos;FORCE=false&apos;
+)
+
+for device in ${DEVICES[@]}; do
+  $JAVA -jar jenkins-cli.jar build AsusWrt_Merlin ${PARAMS[@]} -p DEVICE=${device}
+done</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

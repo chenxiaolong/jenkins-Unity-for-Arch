@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Download git repository from https://github.com/chenxiaolong/UnityNext-for-Arch.git</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>100</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>OVERRIDE</name>
+          <description>Build specified packages only</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.2">
+      <maxConcurrentPerNode>0</maxConcurrentPerNode>
+      <maxConcurrentTotal>0</maxConcurrentTotal>
+      <throttleEnabled>false</throttleEnabled>
+      <throttleOption>project</throttleOption>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.1">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/chenxiaolong/UnityNext-for-Arch.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.PerBuildTag/>
+    </extensions>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>*/2 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+# Clean up git repo
+#git clean -fdx
+
+# If this is the first time building, then make sure that we build all of the packages
+if [ ! -f ./old-commit ]; then
+  git rev-list --max-count=1 HEAD &gt; old-commit
+  BUILD_ALL=true
+fi
+
+git rev-list --max-count=1 HEAD &gt; new-commit
+
+rm -f changed-packages
+
+if [[ ! -z &quot;${OVERRIDE}&quot; ]]; then
+  CHANGED=${OVERRIDE}
+elif [[ &quot;${BUILD_ALL}&quot; == &quot;true&quot; ]]; then
+  CHANGED=$(./What_can_I_update\?.py -l)
+else
+  CHANGED=&quot;&quot;
+  for i in $(git diff --name-only $(cat old-commit) $(cat new-commit) | grep &apos;/PKGBUILD&apos;); do
+    i=${i%/*}
+    CHANGED+=&quot; ${i}&quot;
+  done
+fi
+
+rm -f changed
+
+for i in ${CHANGED}; do
+  echo &quot;Package ${i} was changed, will rebuild&quot;
+
+  echo ${i} &gt;&gt; changed
+done
+
+if [[ -z &quot;${OVERRIDE}&quot; ]]; then
+  mv new-commit old-commit
+fi
+
+rm -f snapshot.tar.gz
+git archive --format=tar.gz -o snapshot.tar.gz HEAD</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>snapshot.tar.gz</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.12">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+            <worstResult>
+              <name>SUCCESS</name>
+              <ordinal>0</ordinal>
+              <color>BLUE</color>
+              <completeBuild>true</completeBuild>
+            </worstResult>
+            <bestResult>
+              <name>SUCCESS</name>
+              <ordinal>0</ordinal>
+              <color>BLUE</color>
+              <completeBuild>true</completeBuild>
+            </bestResult>
+          </condition>
+          <publisher class="hudson.tasks.Shell">
+            <command>#!/bin/bash
+
+export JENKINS_URL=&quot;http://127.0.0.1:8090&quot;
+
+rm -f jenkins-cli.jar
+wget &quot;${JENKINS_URL/https/http}/jnlpJars/jenkins-cli.jar&quot;
+
+SELECTOR=&quot;&lt;SpecificBuildSelector&gt;&lt;buildNumber&gt;${BUILD_NUMBER}&lt;/buildNumber&gt;&lt;/SpecificBuildSelector&gt;&quot;
+
+for i in $(cat changed); do
+  PARAMS=(
+    &apos;-p&apos; &quot;CONFIG=UNFA-build&quot;
+    &apos;-p&apos; &quot;PACKAGE=${i}&quot;
+    &apos;-p&apos; &quot;UPSTREAM_JOB=${JOB_NAME}&quot;
+    &apos;-p&apos; &quot;BUILD_SELECTOR=${SELECTOR}&quot;
+  )
+
+  java -jar jenkins-cli.jar build ArchLinux_Build_Package ${PARAMS[@]}
+done</command>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
