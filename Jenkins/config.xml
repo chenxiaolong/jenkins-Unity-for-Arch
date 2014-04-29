@@ -45,7 +45,7 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter" plugin="antisamy-markup-formatter@1.0">
+  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter" plugin="antisamy-markup-formatter@1.1">
     <disableSyntaxHighlighting>false</disableSyntaxHighlighting>
   </markupFormatter>
   <jdks/>
@@ -89,26 +89,7 @@
     <hudson.model.AllView>
       <owner class="hudson" reference="../../.."/>
       <name>All</name>
-      <description>&lt;br /&gt;&#xd;
-CyanogenMod 11.0 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&#xd;
-&lt;hr /&gt;&#xd;
-Dual Boot Patcher experimental versions are published here: &lt;a href=http://dl.dropbox.com/u/486665/Snapshots/DualBootPatcher/index.html&gt;http://dl.dropbox.com/u/486665/Snapshots/DualBootPatcher/index.html&lt;/a&gt;&#xd;
-&lt;hr /&gt;&#xd;
-To use the Unity-for-Arch repos, add the following to /etc/pacman.conf before &lt;b&gt;[community]&lt;/b&gt;:&#xd;
-&lt;br /&gt;&lt;br /&gt;&#xd;
-&lt;strong&gt;[Unity-for-Arch]&#xd;
-&lt;br /&gt;&#xd;
-SigLevel = Optional TrustAll&#xd;
-&lt;br /&gt;&#xd;
-Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch&#xd;
-&lt;br /&gt;&lt;br /&gt;&#xd;
-[Unity-for-Arch-Extra]&#xd;
-&lt;br /&gt;&#xd;
-SigLevel = Optional TrustAll&#xd;
-&lt;br /&gt;&#xd;
-Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch&lt;/strong&gt;&#xd;
-&lt;br /&gt;&lt;br /&gt;&#xd;
-Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-Arch-Extra)&lt;/b&gt;</description>
+      <description></description>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
@@ -139,21 +120,22 @@ Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-A
       <leftPortletWidth>50%</leftPortletWidth>
       <rightPortletWidth>50%</rightPortletWidth>
       <leftPortlets>
-        <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_27251</id>
-          <name>Job statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatJobs>
+        <hudson.plugins.view.dashboard.builds.LatestBuilds>
+          <id>dashboard_portlet_20078</id>
+          <name>Latest builds</name>
+          <numBuilds>10</numBuilds>
+        </hudson.plugins.view.dashboard.builds.LatestBuilds>
       </leftPortlets>
       <rightPortlets>
         <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_26535</id>
+          <id>dashboard_portlet_21769</id>
           <name>Build statistics</name>
         </hudson.plugins.view.dashboard.stats.StatBuilds>
       </rightPortlets>
       <topPortlets/>
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_10780</id>
+          <id>dashboard_portlet_10439</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
@@ -166,12 +148,7 @@ Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-A
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>UNFA-2.0-Build-sdl2-mir</string>
-        <string>UNFA-2.0-Build-tslib</string>
-        <string>UNFA-2.0-Build-unity-system-compositor-bzr</string>
-        <string>UNFA-2.0-Build-xf86-video-nouveau-mir</string>
         <string>UNFA-3.0-Publish-Repo</string>
-        <string>UNFA-4.0-Track-unity-system-compositor-bzr</string>
         <string>UNFA-5.0-Commit-To-Git</string>
       </jobNames>
       <jobFilters/>
@@ -191,21 +168,22 @@ Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-A
       <leftPortletWidth>50%</leftPortletWidth>
       <rightPortletWidth>50%</rightPortletWidth>
       <leftPortlets>
-        <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_20189</id>
-          <name>Job statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatJobs>
+        <hudson.plugins.view.dashboard.builds.LatestBuilds>
+          <id>dashboard_portlet_26917</id>
+          <name>Latest builds</name>
+          <numBuilds>10</numBuilds>
+        </hudson.plugins.view.dashboard.builds.LatestBuilds>
       </leftPortlets>
       <rightPortlets>
         <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_15274</id>
+          <id>dashboard_portlet_26172</id>
           <name>Build statistics</name>
         </hudson.plugins.view.dashboard.stats.StatBuilds>
       </rightPortlets>
       <topPortlets/>
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_24279</id>
+          <id>dashboard_portlet_24650</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
@@ -236,27 +214,96 @@ Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-A
       <leftPortletWidth>50%</leftPortletWidth>
       <rightPortletWidth>50%</rightPortletWidth>
       <leftPortlets>
-        <hudson.plugins.view.dashboard.stats.StatJobs>
-          <id>dashboard_portlet_16944</id>
-          <name>Job statistics</name>
-        </hudson.plugins.view.dashboard.stats.StatJobs>
+        <hudson.plugins.view.dashboard.builds.LatestBuilds>
+          <id>dashboard_portlet_28420</id>
+          <name>Latest builds</name>
+          <numBuilds>10</numBuilds>
+        </hudson.plugins.view.dashboard.builds.LatestBuilds>
       </leftPortlets>
       <rightPortlets>
         <hudson.plugins.view.dashboard.stats.StatBuilds>
-          <id>dashboard_portlet_13078</id>
+          <id>dashboard_portlet_13639</id>
           <name>Build statistics</name>
         </hudson.plugins.view.dashboard.stats.StatBuilds>
       </rightPortlets>
       <topPortlets/>
       <bottomPortlets>
         <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
-          <id>dashboard_portlet_2462</id>
+          <id>dashboard_portlet_31113</id>
+          <name>Jenkins jobs list</name>
+        </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+      </bottomPortlets>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>All Jobs</name>
+      <description>&lt;br /&gt;&#xd;
+CyanogenMod 11.0 nightlies for the Galaxy S4 are published at &lt;a href=https://sf.net/p/unofficial-cm&gt;https://sf.net/p/unofficial-cm&lt;/a&gt;&#xd;
+&lt;hr /&gt;&#xd;
+Dual Boot Patcher experimental versions are published here: &lt;a href=http://dl.dropbox.com/u/486665/Snapshots/DualBootPatcher/index.html&gt;http://dl.dropbox.com/u/486665/Snapshots/DualBootPatcher/index.html&lt;/a&gt;&#xd;
+&lt;hr /&gt;&#xd;
+To use the Unity-for-Arch repos, add the following to /etc/pacman.conf before &lt;b&gt;[community]&lt;/b&gt;:&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+&lt;strong&gt;[Unity-for-Arch]&#xd;
+&lt;br /&gt;&#xd;
+SigLevel = Optional TrustAll&#xd;
+&lt;br /&gt;&#xd;
+Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+[Unity-for-Arch-Extra]&#xd;
+&lt;br /&gt;&#xd;
+SigLevel = Optional TrustAll&#xd;
+&lt;br /&gt;&#xd;
+Server = http://dl.dropbox.com/u/486665/Repos/$repo/$arch&lt;/strong&gt;&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+Install by running: &lt;b&gt;pacman -Sy $(pacman -Sql Unity-for-Arch Unity-for-Arch-Extra)&lt;/b&gt;</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>ArchLinux_UnityNextForArch_Git</string>
+        <string>DualBoot_Kernel_jflte_adam</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>.*</includeRegex>
+      <recurse>false</recurse>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>false</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets>
+        <hudson.plugins.view.dashboard.builds.LatestBuilds>
+          <id>dashboard_portlet_25825</id>
+          <name>Latest builds</name>
+          <numBuilds>10</numBuilds>
+        </hudson.plugins.view.dashboard.builds.LatestBuilds>
+      </leftPortlets>
+      <rightPortlets>
+        <hudson.plugins.view.dashboard.stats.StatBuilds>
+          <id>dashboard_portlet_25664</id>
+          <name>Build statistics</name>
+        </hudson.plugins.view.dashboard.stats.StatBuilds>
+      </rightPortlets>
+      <topPortlets/>
+      <bottomPortlets>
+        <hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
+          <id>dashboard_portlet_21645</id>
           <name>Jenkins jobs list</name>
         </hudson.plugins.view.dashboard.core.HudsonStdJobsPortlet>
       </bottomPortlets>
     </hudson.plugins.view.dashboard.Dashboard>
   </views>
-  <primaryView>All</primaryView>
+  <primaryView>All Jobs</primaryView>
   <slaveAgentPort>19283</slaveAgentPort>
   <label></label>
   <nodeProperties/>

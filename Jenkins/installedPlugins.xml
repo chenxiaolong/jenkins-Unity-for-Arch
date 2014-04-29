@@ -6,12 +6,12 @@
       <string>1.6.1</string>
     </entry>
     <entry>
-      <string>fail-the-build-plugin</string>
-      <string>1.0</string>
-    </entry>
-    <entry>
       <string>extended-choice-parameter</string>
       <string>0.30</string>
+    </entry>
+    <entry>
+      <string>fail-the-build-plugin</string>
+      <string>1.0</string>
     </entry>
     <entry>
       <string>any-buildstep</string>
@@ -39,7 +39,7 @@
     </entry>
     <entry>
       <string>antisamy-markup-formatter</string>
-      <string>1.0</string>
+      <string>1.1</string>
     </entry>
     <entry>
       <string>jquery</string>
@@ -70,6 +70,10 @@
       <string>0.4</string>
     </entry>
     <entry>
+      <string>embeddable-build-status</string>
+      <string>1.4</string>
+    </entry>
+    <entry>
       <string>external-monitor-job</string>
       <string>1.2</string>
     </entry>
@@ -78,12 +82,12 @@
       <string>1.8.2</string>
     </entry>
     <entry>
-      <string>ansicolor</string>
-      <string>0.3.1</string>
-    </entry>
-    <entry>
       <string>credentials</string>
       <string>1.10</string>
+    </entry>
+    <entry>
+      <string>ansicolor</string>
+      <string>0.3.1</string>
     </entry>
     <entry>
       <string>sectioned-view</string>
@@ -111,7 +115,7 @@
     </entry>
     <entry>
       <string>Hudson core</string>
-      <string>1.558</string>
+      <string>1.561</string>
     </entry>
     <entry>
       <string>dashboard-view</string>
@@ -123,7 +127,7 @@
     </entry>
     <entry>
       <string>matrix-auth</string>
-      <string>1.1</string>
+      <string>1.2</string>
     </entry>
     <entry>
       <string>flexible-publish</string>
@@ -150,6 +154,10 @@
       <string>1.10</string>
     </entry>
     <entry>
+      <string>matrix-project</string>
+      <string>1.0-beta-1</string>
+    </entry>
+    <entry>
       <string>build-blocker-plugin</string>
       <string>1.4-SNAPSHOT (private-02/22/2013 00:37-chenxiaolong)</string>
     </entry>
@@ -162,12 +170,12 @@
       <string>1.3.3</string>
     </entry>
     <entry>
-      <string>thinBackup</string>
-      <string>1.7.4</string>
-    </entry>
-    <entry>
       <string>nodelabelparameter</string>
       <string>1.5.1</string>
+    </entry>
+    <entry>
+      <string>thinBackup</string>
+      <string>1.7.4</string>
     </entry>
   </plugins>
 </org.jvnet.hudson.plugins.thinbackup.backup.PluginList>

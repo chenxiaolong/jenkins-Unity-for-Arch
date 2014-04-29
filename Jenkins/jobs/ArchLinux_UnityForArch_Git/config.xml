@@ -96,6 +96,20 @@ SELECTOR=&quot;&lt;SpecificBuildSelector&gt;&lt;buildNumber&gt;${BUILD_NUMBER}&l
 
 for i in ${CHANGED}; do
   echo &quot;Package ${i} was changed, will rebuild&quot;
+
+  if [[ ! -d &quot;${i}&quot; ]]; then
+    echo &quot;Package ${i} does not exist&quot;
+    continue
+  fi
+
+  pkgver=$(sudo -u nobody /srv/jenkins/get-from-pkgbuild.sh ${i}/PKGBUILD pkgver)
+  pkgrel=$(sudo -u nobody /srv/jenkins/get-from-pkgbuild.sh ${i}/PKGBUILD pkgrel)
+  epoch=$(sudo -u nobody /srv/jenkins/get-from-pkgbuild.sh ${i}/PKGBUILD epoch)
+  version=&quot;${epoch}:${pkgver}-${pkgrel}&quot;
+  if ! /srv/jenkins/newerthanrepo.sh -c /srv/jenkins/UFA-build.conf -p &quot;${i}&quot; -v &quot;${version}&quot;; then
+    echo &quot;Nevermind, version ${version} is not newer than repo&quot;
+    continue
+  fi
  
   PARAMS=(
     &apos;-p&apos; &quot;CONFIG=UFA-build&quot;
