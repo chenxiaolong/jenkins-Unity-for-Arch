@@ -9,33 +9,58 @@
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
     <permission>hudson.model.Computer.Configure:chenxiaolong</permission>
+    <permission>hudson.model.Computer.Configure:woodburyman</permission>
     <permission>hudson.model.Computer.Connect:chenxiaolong</permission>
+    <permission>hudson.model.Computer.Connect:woodburyman</permission>
     <permission>hudson.model.Computer.Create:chenxiaolong</permission>
+    <permission>hudson.model.Computer.Create:woodburyman</permission>
     <permission>hudson.model.Computer.Delete:chenxiaolong</permission>
+    <permission>hudson.model.Computer.Delete:woodburyman</permission>
     <permission>hudson.model.Computer.Disconnect:chenxiaolong</permission>
+    <permission>hudson.model.Computer.Disconnect:woodburyman</permission>
     <permission>hudson.model.Hudson.Administer:chenxiaolong</permission>
+    <permission>hudson.model.Hudson.Administer:woodburyman</permission>
     <permission>hudson.model.Hudson.ConfigureUpdateCenter:chenxiaolong</permission>
+    <permission>hudson.model.Hudson.ConfigureUpdateCenter:woodburyman</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:chenxiaolong</permission>
+    <permission>hudson.model.Hudson.Read:woodburyman</permission>
     <permission>hudson.model.Hudson.RunScripts:chenxiaolong</permission>
+    <permission>hudson.model.Hudson.RunScripts:woodburyman</permission>
     <permission>hudson.model.Hudson.UploadPlugins:chenxiaolong</permission>
+    <permission>hudson.model.Hudson.UploadPlugins:woodburyman</permission>
     <permission>hudson.model.Item.Build:chenxiaolong</permission>
+    <permission>hudson.model.Item.Build:woodburyman</permission>
     <permission>hudson.model.Item.Cancel:chenxiaolong</permission>
+    <permission>hudson.model.Item.Cancel:woodburyman</permission>
     <permission>hudson.model.Item.Configure:chenxiaolong</permission>
+    <permission>hudson.model.Item.Configure:woodburyman</permission>
     <permission>hudson.model.Item.Create:chenxiaolong</permission>
+    <permission>hudson.model.Item.Create:woodburyman</permission>
     <permission>hudson.model.Item.Delete:chenxiaolong</permission>
+    <permission>hudson.model.Item.Delete:woodburyman</permission>
     <permission>hudson.model.Item.Discover:chenxiaolong</permission>
+    <permission>hudson.model.Item.Discover:woodburyman</permission>
     <permission>hudson.model.Item.Read:anonymous</permission>
     <permission>hudson.model.Item.Read:chenxiaolong</permission>
+    <permission>hudson.model.Item.Read:woodburyman</permission>
     <permission>hudson.model.Item.Workspace:chenxiaolong</permission>
+    <permission>hudson.model.Item.Workspace:woodburyman</permission>
     <permission>hudson.model.Run.Delete:chenxiaolong</permission>
+    <permission>hudson.model.Run.Delete:woodburyman</permission>
     <permission>hudson.model.Run.Update:chenxiaolong</permission>
+    <permission>hudson.model.Run.Update:woodburyman</permission>
     <permission>hudson.model.View.Configure:chenxiaolong</permission>
+    <permission>hudson.model.View.Configure:woodburyman</permission>
     <permission>hudson.model.View.Create:chenxiaolong</permission>
+    <permission>hudson.model.View.Create:woodburyman</permission>
     <permission>hudson.model.View.Delete:chenxiaolong</permission>
+    <permission>hudson.model.View.Delete:woodburyman</permission>
     <permission>hudson.model.View.Read:anonymous</permission>
     <permission>hudson.model.View.Read:chenxiaolong</permission>
+    <permission>hudson.model.View.Read:woodburyman</permission>
     <permission>hudson.scm.SCM.Tag:chenxiaolong</permission>
+    <permission>hudson.scm.SCM.Tag:woodburyman</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>true</disableSignup>

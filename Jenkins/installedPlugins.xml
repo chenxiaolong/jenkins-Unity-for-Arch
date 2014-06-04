@@ -14,12 +14,12 @@
       <string>1.0</string>
     </entry>
     <entry>
-      <string>any-buildstep</string>
-      <string>0.1</string>
-    </entry>
-    <entry>
       <string>translation</string>
       <string>1.11</string>
+    </entry>
+    <entry>
+      <string>any-buildstep</string>
+      <string>0.1</string>
     </entry>
     <entry>
       <string>clone-workspace-scm</string>
@@ -115,7 +115,11 @@
     </entry>
     <entry>
       <string>Hudson core</string>
-      <string>1.561</string>
+      <string>1.565</string>
+    </entry>
+    <entry>
+      <string>monitoring</string>
+      <string>1.50.0</string>
     </entry>
     <entry>
       <string>dashboard-view</string>
@@ -155,15 +159,11 @@
     </entry>
     <entry>
       <string>matrix-project</string>
-      <string>1.0-beta-1</string>
+      <string>1.2</string>
     </entry>
     <entry>
       <string>build-blocker-plugin</string>
       <string>1.4-SNAPSHOT (private-02/22/2013 00:37-chenxiaolong)</string>
-    </entry>
-    <entry>
-      <string>bazaar</string>
-      <string>1.22</string>
     </entry>
     <entry>
       <string>conditional-buildstep</string>

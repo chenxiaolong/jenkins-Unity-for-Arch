@@ -5,16 +5,16 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:woodburyman</permission>
-      <permission>hudson.model.Item.Read:woodburyman</permission>
       <permission>hudson.model.Item.Configure:woodburyman</permission>
-      <permission>hudson.model.Run.Delete:woodburyman</permission>
-      <permission>hudson.scm.SCM.Tag:woodburyman</permission>
-      <permission>hudson.model.Item.Discover:woodburyman</permission>
       <permission>hudson.model.Item.Delete:woodburyman</permission>
-      <permission>hudson.model.Run.Update:woodburyman</permission>
-      <permission>hudson.model.Item.Cancel:woodburyman</permission>
+      <permission>hudson.scm.SCM.Tag:woodburyman</permission>
       <permission>hudson.model.Item.Build:woodburyman</permission>
+      <permission>hudson.model.Run.Delete:woodburyman</permission>
+      <permission>hudson.model.Run.Update:woodburyman</permission>
+      <permission>hudson.model.Item.Discover:woodburyman</permission>
+      <permission>hudson.model.Item.Cancel:woodburyman</permission>
+      <permission>hudson.model.Item.Read:woodburyman</permission>
+      <permission>hudson.model.Item.Workspace:woodburyman</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
       <useBuildBlocker>false</useBuildBlocker>
@@ -31,10 +31,8 @@
     <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.2">
       <maxConcurrentPerNode>0</maxConcurrentPerNode>
       <maxConcurrentTotal>0</maxConcurrentTotal>
-      <categories/>
       <throttleEnabled>false</throttleEnabled>
       <throttleOption>project</throttleOption>
-      <configVersion>1</configVersion>
     </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
