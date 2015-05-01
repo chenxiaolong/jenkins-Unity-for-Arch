@@ -22,14 +22,14 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.3">
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.4">
       <maxConcurrentPerNode>0</maxConcurrentPerNode>
       <maxConcurrentTotal>0</maxConcurrentTotal>
       <throttleEnabled>false</throttleEnabled>
       <throttleOption>project</throttleOption>
     </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.2">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -38,7 +38,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>master</name>
+        <name>gnome-3.16</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -61,72 +61,8 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-
-export JENKINS_URL=&quot;http://127.0.0.1:8090&quot;
-
-# Clean up git repo
-#git clean -fdx
-
-# If this is the first time building, then make sure that we build all of the packages
-if [ ! -f ./old-commit ]; then
-  git rev-list --max-count=1 HEAD &gt; old-commit
-  BUILD_ALL=true
-fi
-
-git rev-list --max-count=1 HEAD &gt; new-commit
-
-rm -f changed-packages
-
-if [[ ! -z &quot;${OVERRIDE}&quot; ]]; then
-  CHANGED=${OVERRIDE}
-elif [[ &quot;${BUILD_ALL}&quot; == &quot;true&quot; ]]; then
-  CHANGED=$(./What_can_I_update\?.py -l)
-else
-  CHANGED=&quot;&quot;
-  for i in $(git diff --name-only $(cat old-commit) $(cat new-commit) | grep &apos;/PKGBUILD&apos;); do
-    i=${i%/*}
-    CHANGED+=&quot; ${i}&quot;
-  done
-fi
-
-rm -f jenkins-cli.jar
-wget &quot;${JENKINS_URL/https/http}/jnlpJars/jenkins-cli.jar&quot;
-
-SELECTOR=&quot;&lt;SpecificBuildSelector&gt;&lt;buildNumber&gt;${BUILD_NUMBER}&lt;/buildNumber&gt;&lt;/SpecificBuildSelector&gt;&quot;
-
-for i in ${CHANGED}; do
-  echo &quot;Package ${i} was changed, will rebuild&quot;
-
-  if [[ ! -d &quot;${i}&quot; ]]; then
-    echo &quot;Package ${i} does not exist&quot;
-    continue
-  fi
-
-  pkgver=$(sudo -u nobody /srv/jenkins/get-from-pkgbuild.sh ${i}/PKGBUILD pkgver)
-  pkgrel=$(sudo -u nobody /srv/jenkins/get-from-pkgbuild.sh ${i}/PKGBUILD pkgrel)
-  epoch=$(sudo -u nobody /srv/jenkins/get-from-pkgbuild.sh ${i}/PKGBUILD epoch)
-  version=&quot;${epoch}:${pkgver}-${pkgrel}&quot;
-  if ! /srv/jenkins/newerthanrepo.sh -c /srv/jenkins/UFA-build.conf -p &quot;${i}&quot; -v &quot;${version}&quot;; then
-    echo &quot;Nevermind, version ${version} is not newer than repo&quot;
-    continue
-  fi
- 
-  PARAMS=(
-    &apos;-p&apos; &quot;CONFIG=UFA-build&quot;
-    &apos;-p&apos; &quot;PACKAGE=${i}&quot;
-    &apos;-p&apos; &quot;UPSTREAM_JOB=${JOB_NAME}&quot;
-    &apos;-p&apos; &quot;BUILD_SELECTOR=${SELECTOR}&quot;
-  )
-
-  java -jar jenkins-cli.jar build ArchLinux_Build_Package ${PARAMS[@]}
-done
-
-if [[ -z &quot;${OVERRIDE}&quot; ]]; then
-  mv new-commit old-commit
-fi
-
-rm -f snapshot.tar.gz
-git archive --format=tar.gz -o snapshot.tar.gz HEAD</command>
+set -e
+/srv/jenkins/git-wrapper.sh -c UFA-build-GNOME316 -o &quot;${OVERRIDE}&quot; -j &quot;${JOB_NAME}&quot; -n &quot;${BUILD_NUMBER}&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<hudson.plugins.ansicolor.AnsiColorBuildWrapper_-DescriptorImpl plugin="ansicolor@0.3.1">
+<hudson.plugins.ansicolor.AnsiColorBuildWrapper_-DescriptorImpl plugin="ansicolor@0.4.1">
   <colorMaps>
     <hudson.plugins.ansicolor.AnsiColorMap>
       <name>xterm</name>
@@ -68,6 +68,29 @@
         <string>magenta</string>
         <string>cyan</string>
         <string>white</string>
+      </bgMap>
+    </hudson.plugins.ansicolor.AnsiColorMap>
+    <hudson.plugins.ansicolor.AnsiColorMap>
+      <name>gnome-terminal</name>
+      <fgMap>
+        <string>#2E3436</string>
+        <string>#CC0000</string>
+        <string>#4E9A06</string>
+        <string>#C4A000</string>
+        <string>#3465A4</string>
+        <string>#75507B</string>
+        <string>#06989A</string>
+        <string>#D3D7CF</string>
+      </fgMap>
+      <bgMap>
+        <string>#2E3436</string>
+        <string>#CC0000</string>
+        <string>#4E9A06</string>
+        <string>#C4A000</string>
+        <string>#3465A4</string>
+        <string>#75507B</string>
+        <string>#06989A</string>
+        <string>#D3D7CF</string>
       </bgMap>
     </hudson.plugins.ansicolor.AnsiColorMap>
   </colorMaps>

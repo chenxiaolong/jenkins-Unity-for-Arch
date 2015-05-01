@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Please be courteous and download the builds from &lt;a href=&quot;http://snapshots.noobdev.io&quot;&gt;http://snapshots.noobdev.io&lt;/a&gt;&#xd;
+&lt;br /&gt;&lt;br /&gt;&#xd;
+If too many people download from this server, I&apos;ll have to make it non-public.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.4">
+      <maxConcurrentPerNode>0</maxConcurrentPerNode>
+      <maxConcurrentTotal>0</maxConcurrentTotal>
+      <categories/>
+      <throttleEnabled>false</throttleEnabled>
+      <throttleOption>project</throttleOption>
+      <configVersion>1</configVersion>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/chenxiaolong/DualBootPatcher.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>*/2 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+rm -rf tmp.* dist/ archive/
+mkdir archive/</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+set -e
+
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_NDK_HOME=/opt/android-ndk
+
+export PATH=&quot;/usr/lib/ccache/bin:${PATH}&quot;
+
+VERSION=$(git describe --long | sed -E &quot;s/^v//g;s/([^-]*-g)/r\1/;s/-/./g&quot;)
+
+echo ----------------------------------------------------------------
+echo &quot;Packaging version ${VERSION}&quot;
+echo ----------------------------------------------------------------
+
+git submodule init
+git submodule sync
+git submodule update
+
+################################################################################
+# Android build
+################################################################################
+
+rm -rf buildandroid
+mkdir -p buildandroid
+pushd buildandroid
+
+cmake .. -DMBP_BUILD_ANDROID=ON -DMBP_CI_VERSION=&quot;${VERSION}&quot;
+make
+rm -rvf assets
+cpack -G TXZ
+
+popd
+
+################################################################################
+# Android GUI build
+################################################################################
+
+pushd Android_GUI
+
+./gradlew assembleCi
+
+popd
+
+################################################################################
+# Win32 build
+################################################################################
+
+export MINGW_TRIPLET=i686-w64-mingw32
+export MINGW_ROOT_PATH=/usr/${MINGW_TRIPLET}
+
+sed \
+    -e &quot;s,@MINGW_TRIPLET@,${MINGW_TRIPLET},g&quot; \
+    -e &quot;s,@MINGW_ROOT_PATH@,${MINGW_ROOT_PATH},g&quot; \
+    &lt; cmake/toolchain-mingw.cmake.in \
+    &gt; cmake/toolchain-mingw.cmake
+
+rm -rf buildmingw
+mkdir -p buildmingw
+pushd buildmingw
+
+cmake .. \
+    -DMBP_CI_VERSION=&quot;${VERSION}&quot; \
+    -DMBP_PORTABLE=ON \
+    -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchain-mingw.cmake \
+    -DCMAKE_C_COMPILER=&quot;ccache ${MINGW_TRIPLET}-gcc&quot; \
+    -DCMAKE_CXX_COMPILER=&quot;ccache ${MINGW_TRIPLET}-g++&quot; \
+    -DCMAKE_C_FLAGS=&quot;-O2&quot; \
+    -DCMAKE_CXX_FLAGS=&quot;-O2&quot; \
+    -DMBP_USE_SYSTEM_LIBRARY_ZLIB=ON \
+    -DMBP_USE_SYSTEM_LIBRARY_LIBLZMA=ON \
+    -DMBP_MINGW_USE_STATIC_LIBS=ON
+
+make -j2
+
+cpack -G ZIP
+
+unzip DualBootPatcher-${VERSION}-win32.zip
+rm DualBootPatcher-${VERSION}-win32.zip
+pushd DualBootPatcher-${VERSION}-win32
+
+dlls=(
+    #libboost_filesystem-mt.dll
+    #libboost_system-mt.dll
+    libgcc_s_sjlj-1.dll
+    libGLESv2.dll
+    #libiconv-2.dll
+    libpcre16-0.dll
+    libpng16-16.dll
+    libstdc++-6.dll
+    libwinpthread-1.dll
+    Qt5Core.dll
+    Qt5Gui.dll
+    Qt5Widgets.dll
+    zlib1.dll
+)
+for dll in &quot;${dlls[@]}&quot;; do
+    cp &quot;${MINGW_ROOT_PATH}/bin/${dll}&quot; .
+done
+
+# Qt Windows plugin
+mkdir platforms/
+cp &quot;${MINGW_ROOT_PATH}&quot;/lib/qt/plugins/platforms/qwindows.dll platforms/
+
+# Optionally, compress dlls
+upx --lzma *.dll
+
+# Strip binaries
+strip DualBootPatcher.exe
+strip bootimgtool.exe
+
+popd
+
+zip -r DualBootPatcher-${VERSION}-win32.zip DualBootPatcher-${VERSION}-win32
+
+popd
+
+################################################################################
+# Archive builds
+################################################################################
+
+echo &apos;Preparing files to be archived&apos;
+
+# Android build
+cp Android_GUI/build/outputs/apk/Android_GUI-ci.apk \
+    &quot;archive/DualBootPatcherAndroid-${VERSION}-snapshot.apk&quot;
+# Win32 build
+cp buildmingw/DualBootPatcher-${VERSION}-win32.zip \
+    &quot;archive/DualBootPatcher-${VERSION}-win32.zip&quot;
+
+for f in archive/*; do
+    md5sum &quot;${f}&quot; | tee &quot;${f}.md5sum&quot;
+done
+
+################################################################################
+# Done!
+################################################################################
+
+echo &apos;Build completed!&apos;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>archive/*</artifacts>
+      <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+    </hudson.tasks.ArtifactArchiver>
+    <jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin plugin="publish-over-ssh@1.12">
+      <consolePrefix>SSH: </consolePrefix>
+      <delegate>
+        <publishers>
+          <jenkins.plugins.publish__over__ssh.BapSshPublisher>
+            <configName>noobdev.io</configName>
+            <verbose>false</verbose>
+            <transfers>
+              <jenkins.plugins.publish__over__ssh.BapSshTransfer>
+                <remoteDirectory>snapshots</remoteDirectory>
+                <sourceFiles>archive/*</sourceFiles>
+                <excludes></excludes>
+                <removePrefix>archive</removePrefix>
+                <remoteDirectorySDF>false</remoteDirectorySDF>
+                <flatten>false</flatten>
+                <cleanRemote>false</cleanRemote>
+                <noDefaultExcludes>false</noDefaultExcludes>
+                <makeEmptyDirs>false</makeEmptyDirs>
+                <patternSeparator>[, ]+</patternSeparator>
+                <execCommand>/srv/uploads/create-index.sh</execCommand>
+                <execTimeout>120000</execTimeout>
+                <usePty>false</usePty>
+              </jenkins.plugins.publish__over__ssh.BapSshTransfer>
+            </transfers>
+            <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+            <usePromotionTimestamp>false</usePromotionTimestamp>
+            <retry class="jenkins.plugins.publish_over_ssh.BapSshRetry">
+              <retries>10</retries>
+              <retryDelay>10000</retryDelay>
+            </retry>
+          </jenkins.plugins.publish__over__ssh.BapSshPublisher>
+        </publishers>
+        <continueOnError>false</continueOnError>
+        <failOnError>false</failOnError>
+        <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+        <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+      </delegate>
+    </jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+  </buildWrappers>
+</project>

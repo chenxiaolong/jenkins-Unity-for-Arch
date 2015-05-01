@@ -6,7 +6,7 @@
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>ArchLinux_UnityForArch.*Git</blockingJobs>
+      <blockingJobs>ArchLinux.*Git.*</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -21,7 +21,8 @@
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
               <string>UFA-build</string>
-              <string>UFA-build-GNOME312</string>
+              <string>UFA-build-GNOME314</string>
+              <string>UFA-build-testing</string>
               <string>UFAE-build</string>
               <string>UFAE-build-GNOME312</string>
               <string>UNFA-build</string>
@@ -40,7 +41,7 @@
         </hudson.plugins.copyartifact.BuildSelectorParameter>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.2">
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.3">
       <maxConcurrentPerNode>0</maxConcurrentPerNode>
       <maxConcurrentTotal>0</maxConcurrentTotal>
       <throttleEnabled>false</throttleEnabled>
@@ -92,10 +93,12 @@ sudo /srv/jenkins/build-wrapper.sh --config /srv/jenkins/${CONFIG}.conf ${PACKAG
   <publishers>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>${PACKAGE}/*.pkg.tar.xz</artifacts>
-      <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.20">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.21">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>
@@ -124,7 +127,7 @@ sudo /srv/jenkins/build-wrapper.sh --config /srv/jenkins/${CONFIG}.conf ${PACKAG
               <completeBuild>true</completeBuild>
             </bestResult>
           </condition>
-          <publisher class="hudson.plugins.parameterizedtrigger.BuildTrigger" plugin="parameterized-trigger@2.24">
+          <publisher class="hudson.plugins.parameterizedtrigger.BuildTrigger" plugin="parameterized-trigger@2.25">
             <configs>
               <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
                 <configs>

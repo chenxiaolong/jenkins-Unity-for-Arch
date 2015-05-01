@@ -1,0 +1,483 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>2</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Discover:woodburyman</permission>
+      <permission>hudson.model.Item.Build:woodburyman</permission>
+      <permission>hudson.model.Item.Cancel:woodburyman</permission>
+      <permission>hudson.model.Run.Update:woodburyman</permission>
+      <permission>hudson.model.Run.Delete:woodburyman</permission>
+      <permission>hudson.model.Item.Configure:woodburyman</permission>
+      <permission>hudson.model.Item.Read:woodburyman</permission>
+      <permission>hudson.model.Item.Delete:woodburyman</permission>
+      <permission>hudson.scm.SCM.Tag:woodburyman</permission>
+      <permission>hudson.model.Item.Workspace:woodburyman</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4-SNAPSHOT">
+      <useBuildBlocker>true</useBuildBlocker>
+      <blockingJobs>Android_Update_Changelog</blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>LUNCH</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>jflte</string>
+              <string>hammerhead</string>
+              <string>bacon</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>ROM</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>cyanogenmod</string>
+              <string>slimroms</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BRANCH</name>
+          <description>&lt;strong&gt;cm-11.0&lt;/strong&gt; - CyanogenMod&apos;s Android 4.4 branch&lt;br /&gt;
+&lt;strong&gt;kk4.4&lt;/strong&gt; - SlimRoms&apos; Android 4.4 branch</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>cm-11.0</string>
+              <string>kk4.4</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CM_EXTRAVERSION</name>
+          <description>&lt;strong&gt;[TEST BUILDS]&lt;/strong&gt; This is that tag that gets appended to the build&apos;s version and filename.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>UPLOAD_AS</name>
+          <description>What should the build be uploaded as?</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>NONE</string>
+              <string>TESTBUILD</string>
+              <string>NIGHTLY</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>GERRIT_CHANGES</name>
+          <description>&lt;strong&gt;[TEST BUILDS]&lt;/strong&gt; List of changes IDs/change numbers/URLs from the ROM&apos;s gerrit server to cherrypick (space-delimited)</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>CLEAN</name>
+          <description>&lt;strong&gt;[DEBUG]&lt;/strong&gt;</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>SYNC</name>
+          <description>&lt;strong&gt;[DEBUG]&lt;/strong&gt;</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>true</string>
+              <string>false</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>HUDSON_BRANCH</name>
+          <description>&lt;strong&gt;[DEBUG]&lt;/strong&gt; Which branch of hudson repo to use</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>UPDATE_TIMESTAMP</name>
+          <description>&lt;strong&gt;[NIGHTLY ONLY]&lt;/strong&gt; The parameter determines whether or not the &quot;last-build&quot; timestamp for the changelog generator should be updated. This should only be enabled for nightly builds.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>HUDSON_REPO</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>chenxiaolong</string>
+              <string>WoodburyMan</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@1.8.3">
+      <maxConcurrentPerNode>1</maxConcurrentPerNode>
+      <maxConcurrentTotal>10</maxConcurrentTotal>
+      <throttleEnabled>true</throttleEnabled>
+      <throttleOption>project</throttleOption>
+    </hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>VM_woodburyman || Laptop_cxl-4270cto</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>Android_Update_Changelog</project>
+      <filter>changelogs/changes_${ROM}_${BRANCH}_${LUNCH}</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <optional>true</optional>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+export LANG=en_US.UTF-8
+
+################################################################################
+# Set up environment                                                           #
+################################################################################
+
+jworkspace=&quot;${WORKSPACE}&quot;
+rm -f ${jworkspace}/upload.prop
+rm -f ${jworkspace}/changelog.prop
+
+################################################################################
+# Set up remote builders                                                       #
+################################################################################
+
+if grep -q &quot;cxl-4270cto&quot; &lt;&lt;&lt; &quot;${NODE_NAME}&quot;; then
+  export CCACHE_DIR=/stuff/chenxiaolong/ccache
+  export CCACHE_SIZE=30G
+  export CLEAN=true
+
+  aworkspace=/stuff/chenxiaolong/Android/workspace
+  key=&quot;-i /stuff/chenxiaolong/jenkins/jenkins.key&quot;
+  pass=26f54a85dbdc8b47193ba78fd0a5c28af2b62269514ed47e2903e0a95d70017bde873eda42c9cfdb4b0e0a928a96a6edbf4c1ef1e7e863e285745bd0464a4a8a
+  java=&quot;/opt/java/jre/bin/java&quot;
+fi
+
+if [ &quot;x${NODE_NAME}&quot; = &quot;xVM_woodburyman&quot; ]; then
+  export CCACHE_DIR=/home/woodburyman/Android/ccache
+  export CCACHE_SIZE=50G
+
+  aworkspace=/home/woodburyman/Android
+  key=&quot;-i /home/woodburyman/jenkins.key&quot;
+  pass=1df5bfdfc1dee9d1ca6d89c421e07434fdf39256ad5d0f62e999f58909f8d0da14470ae7cc9681dae0ab59b16d3c2d6f6af8292fe24afd932e22999c5eef4211
+  java=&quot;/usr/bin/java&quot;
+fi
+
+if [[ -z &quot;${key}&quot; ]]; then
+  echo &quot;${NODE_NAME} has no key and is unauthorized to communicate with Jenkins&quot;
+  exit 1
+fi
+
+################################################################################
+# Use SSL                                                                      #
+################################################################################
+
+export JENKINS_URL=${JENKINS_URL/http:/https:}
+
+certificate=&quot;${aworkspace}/jenkins-cli.cer&quot;
+keystore=&quot;${aworkspace}/jenkins-cli.ks&quot;
+
+wgetargs=&quot;--ca-certificate=${certificate}&quot;
+wgetargs+=&quot; -4&quot; ## TEMPORARY
+
+if [[ ! -f &quot;${certificate}&quot; ]] || [[ ! -f &quot;${keystore}&quot; ]]; then
+  echo &quot;Keystore and certificate not set up properly!&quot;
+  exit 1
+fi
+
+java+=&quot; -Djavax.net.ssl.trustStore=${aworkspace}/jenkins-cli.ks&quot;
+java+=&quot; -Djavax.net.ssl.trustStorePassword=${pass}&quot;
+
+################################################################################
+# Set up ROM parameters                                                        #
+################################################################################
+
+# Remove non-[a-zA-Z0-9_] characters
+export CM_EXTRAVERSION=$(echo &quot;${CM_EXTRAVERSION}&quot; | sed &apos;s/[^a-zA-Z0-9_]//g&apos;)
+
+if [[ -z &quot;${CM_EXTRAVERSION}&quot; ]] &amp;&amp; [[ &quot;${UPLOAD_AS}&quot; == &quot;NIGHTLY&quot; ]]; then
+  export CM_EXTRAVERSION=noobdev
+fi
+
+tag=&quot;&quot;
+if ! [[ -z &quot;${CM_EXTRAVERSION}&quot; ]]; then
+  tag=&quot;[${CM_EXTRAVERSION}]&quot;
+fi
+
+################################################################################
+# Set up Jenkins                                                               #
+################################################################################
+
+rm -f jenkins-cli.jar
+wget ${wgetargs} &quot;${JENKINS_URL}/jnlpJars/jenkins-cli.jar&quot;
+
+${java} -jar jenkins-cli.jar ${key} set-build-display-name \
+    ${JOB_NAME} ${BUILD_NUMBER} &quot;${LUNCH}&quot;
+${java} -jar jenkins-cli.jar ${key} set-build-description \
+    ${JOB_NAME} ${BUILD_NUMBER} &quot;[${BRANCH}][${LUNCH}]${tag} - $(date +%Y%m%d)&quot;
+
+################################################################################
+# Set up workspace                                                             #
+################################################################################
+
+pushd &quot;${aworkspace}&quot;
+rm -rf hudson
+git clone https://github.com/${HUDSON_REPO}/hudson.git
+cd hudson
+if ! [ -z &quot;${HUDSON_BRANCH}&quot; ]; then
+  git checkout &quot;${HUDSON_BRANCH}&quot;
+else
+  git checkout master
+fi
+popd
+
+# Get previous changelog
+changelog=&quot;changes_${ROM}_${BRANCH}_${LUNCH}&quot;
+old_changelog=&quot;${jworkspace}/changelogs/${changelog}&quot;
+
+if [[ -f &quot;${old_changelog}&quot; ]]; then
+  echo &quot;****************************************************************&quot;
+  echo &quot;Getting old timestamp:&quot;
+  echo &quot;$(basename &quot;${old_changelog}&quot;)&quot;
+  cat &quot;${old_changelog}&quot;
+  echo
+  echo &quot;****************************************************************&quot;
+  cp &quot;${old_changelog}&quot; &quot;${aworkspace}&quot;
+fi
+
+################################################################################
+# Build!                                                                       #
+################################################################################
+
+pushd &quot;${aworkspace}/hudson&quot;
+
+args=(
+  &apos;-w&apos; &quot;${aworkspace}&quot;
+  &apos;-r&apos; &quot;${ROM}&quot;
+  &apos;-b&apos; &quot;${BRANCH}&quot;
+  &apos;-d&apos; &quot;${LUNCH}&quot;
+)
+
+
+if [[ &quot;${CLEAN}&quot; == &quot;true&quot; ]]; then
+  args+=(&apos;-c&apos;)
+fi
+
+if [[ &quot;${SYNC}&quot; == &quot;true&quot; ]]; then
+  args+=(&apos;-s&apos;)
+fi
+
+if [[ &quot;${UPDATE_TIMESTAMP}&quot; == &quot;true&quot; ]]; then
+  args+=(&apos;-u&apos;)
+fi
+
+if [[ ! -z &quot;${CM_EXTRAVERSION}&quot; ]]; then
+  args+=(&apos;-o&apos; &quot;extraversion=${CM_EXTRAVERSION}&quot;)
+fi
+
+bash ./build.sh &quot;${args[@]}&quot;
+exitstatus=${?}
+echo &quot;EXITED WITH STATUS: ${exitstatus}&quot;
+popd
+
+################################################################################
+# Archive files                                                                #
+################################################################################
+
+rm -rf &quot;${jworkspace}/archive/&quot;
+mkdir &quot;${jworkspace}/archive/&quot;
+cp &quot;${aworkspace}&quot;/archive/* &quot;${jworkspace}&quot;/archive/
+rm &quot;${aworkspace}&quot;/archive/*
+
+################################################################################
+# Update changelog                                                             #
+################################################################################
+
+selector=&quot;&lt;SpecificBuildSelector&gt;&lt;buildNumber&gt;${BUILD_NUMBER}&lt;/buildNumber&gt;&lt;/SpecificBuildSelector&gt;&quot;
+
+# Update changelog if build didn&apos;t fail
+if [ &quot;${exitstatus}&quot; -eq 0 ] &amp;&amp; [ &quot;x${UPDATE_TIMESTAMP}&quot; = &quot;xtrue&quot; ]; then
+  echo &quot;****************************************************************&quot;
+  echo &quot;Updating changelog:&quot;
+
+  new_changelog=&quot;${aworkspace}/${changelog}&quot;
+  timestamp=&quot;$(cat &quot;${new_changelog}&quot;)&quot;
+
+  echo &quot;TIMESTAMP=${timestamp}&quot;     &gt;  &quot;${jworkspace}/changelog.prop&quot;
+  echo &quot;ROM=${ROM}&quot;                 &gt;&gt; &quot;${jworkspace}/changelog.prop&quot;
+  echo &quot;LUNCH=${LUNCH}&quot;             &gt;&gt; &quot;${jworkspace}/changelog.prop&quot;
+  echo &quot;BRANCH=${BRANCH}&quot;           &gt;&gt; &quot;${jworkspace}/changelog.prop&quot;
+  echo &quot;BUILD_SELECTOR=${selector}&quot; &gt;&gt; &quot;${jworkspace}/changelog.prop&quot;
+
+  cat &quot;${jworkspace}/changelog.prop&quot;
+  echo &quot;****************************************************************&quot;
+fi
+
+echo &quot;BUILD_SELECTOR=${selector}&quot; &gt; &quot;${jworkspace}/upload.prop&quot;
+
+################################################################################
+# Done!                                                                        #
+################################################################################
+
+exit ${exitstatus}</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher plugin="flexible-publish@0.12">
+      <publishers>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.logic.And" plugin="run-condition@1.0">
+            <conditions>
+              <org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+                <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition">
+                  <worstResult>
+                    <name>SUCCESS</name>
+                    <ordinal>0</ordinal>
+                    <color>BLUE</color>
+                    <completeBuild>true</completeBuild>
+                  </worstResult>
+                  <bestResult>
+                    <name>SUCCESS</name>
+                    <ordinal>0</ordinal>
+                    <color>BLUE</color>
+                    <completeBuild>true</completeBuild>
+                  </bestResult>
+                </condition>
+              </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+              <org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+                <condition class="org.jenkins_ci.plugins.run_condition.logic.Not">
+                  <condition class="org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition">
+                    <arg1>${UPLOAD_AS}</arg1>
+                    <arg2>NONE</arg2>
+                    <ignoreCase>false</ignoreCase>
+                  </condition>
+                </condition>
+              </org.jenkins__ci.plugins.run__condition.logic.ConditionContainer>
+            </conditions>
+          </condition>
+          <publisher class="hudson.tasks.ArtifactArchiver">
+            <artifacts>archive/*</artifacts>
+            <latestOnly>false</latestOnly>
+            <allowEmptyArchive>false</allowEmptyArchive>
+            <onlyIfSuccessful>false</onlyIfSuccessful>
+            <defaultExcludes>true</defaultExcludes>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition" plugin="run-condition@1.0">
+            <arg1>${UPDATE_TIMESTAMP}</arg1>
+            <arg2>true</arg2>
+            <ignoreCase>false</ignoreCase>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.25">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>changelog.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                    <useMatrixChild>false</useMatrixChild>
+                    <onlyExactRuns>false</onlyExactRuns>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                </configs>
+                <projects>Android_Update_Changelog</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.logic.Not" plugin="run-condition@1.0">
+            <condition class="org.jenkins_ci.plugins.run_condition.core.StringsMatchCondition">
+              <arg1>${UPLOAD_AS}</arg1>
+              <arg2>NONE</arg2>
+              <ignoreCase>false</ignoreCase>
+            </condition>
+          </condition>
+          <publisher class="hudson.plugins.parameterizedtrigger.TriggerBuilder" plugin="parameterized-trigger@2.25">
+            <configs>
+              <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+                <configs>
+                  <hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                    <propertiesFile>upload.prop</propertiesFile>
+                    <failTriggerOnMissing>true</failTriggerOnMissing>
+                    <useMatrixChild>false</useMatrixChild>
+                    <onlyExactRuns>false</onlyExactRuns>
+                  </hudson.plugins.parameterizedtrigger.FileBuildParameters>
+                  <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+                    <properties>UPLOAD_AS=$UPLOAD_AS</properties>
+                  </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+                </configs>
+                <projects>Android_Publish_Build</projects>
+                <condition>ALWAYS</condition>
+                <triggerWithNoParameters>false</triggerWithNoParameters>
+                <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
+              </hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
+            </configs>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+        <org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+          <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+            <worstResult>
+              <name>FAILURE</name>
+              <ordinal>2</ordinal>
+              <color>RED</color>
+              <completeBuild>true</completeBuild>
+            </worstResult>
+            <bestResult>
+              <name>FAILURE</name>
+              <ordinal>2</ordinal>
+              <color>RED</color>
+              <completeBuild>true</completeBuild>
+            </bestResult>
+          </condition>
+          <publisher class="org.jenkins_ci.plugins.fail_the_build.FixResultBuilder" plugin="fail-the-build-plugin@1.0">
+            <defaultResultName>FAILURE</defaultResultName>
+            <success></success>
+            <unstable></unstable>
+            <failure></failure>
+            <aborted></aborted>
+          </publisher>
+          <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
+        </org.jenkins__ci.plugins.flexible__publish.ConditionalPublisher>
+      </publishers>
+    </org.jenkins__ci.plugins.flexible__publish.FlexiblePublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+  </buildWrappers>
+</project>
