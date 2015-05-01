@@ -3,7 +3,7 @@
   <plugins>
     <entry>
       <string>ssh-credentials</string>
-      <string>1.10</string>
+      <string>1.11</string>
     </entry>
     <entry>
       <string>fail-the-build-plugin</string>
@@ -23,7 +23,7 @@
     </entry>
     <entry>
       <string>jquery</string>
-      <string>1.7.2-1</string>
+      <string>1.11.2-0</string>
     </entry>
     <entry>
       <string>mailer</string>
@@ -47,7 +47,7 @@
     </entry>
     <entry>
       <string>embeddable-build-status</string>
-      <string>1.6</string>
+      <string>1.7</string>
     </entry>
     <entry>
       <string>job-exporter</string>
@@ -91,11 +91,11 @@
     </entry>
     <entry>
       <string>git-client</string>
-      <string>1.16.1</string>
+      <string>1.17.0</string>
     </entry>
     <entry>
       <string>flexible-publish</string>
-      <string>0.14.1</string>
+      <string>0.15.1</string>
     </entry>
     <entry>
       <string>matrix-auth</string>
@@ -119,7 +119,7 @@
     </entry>
     <entry>
       <string>extended-choice-parameter</string>
-      <string>0.34</string>
+      <string>0.37</string>
     </entry>
     <entry>
       <string>any-buildstep</string>
@@ -147,7 +147,7 @@
     </entry>
     <entry>
       <string>script-security</string>
-      <string>1.13</string>
+      <string>1.14</string>
     </entry>
     <entry>
       <string>throttle-concurrents</string>
